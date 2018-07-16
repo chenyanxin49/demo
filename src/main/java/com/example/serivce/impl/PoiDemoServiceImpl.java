@@ -59,6 +59,8 @@ public class PoiDemoServiceImpl implements IPoiDemoService {
                     session.clearCache();
                 }
             }
+            session.commit();
+            // 清理缓存，防止溢出
             System.out.println("成功 = [" + i + "]");
         } catch (Exception e) {
             // 没有提交的数据可以回滚
