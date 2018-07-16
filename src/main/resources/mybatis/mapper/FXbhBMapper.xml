@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.FXbhBMapper" >
+  <resultMap id="BaseResultMap" type="com.example.domain.FXbhB" >
+    <id column="TOWNCD" property="towncd" jdbcType="VARCHAR" />
+    <id column="XBH" property="xbh" jdbcType="VARCHAR" />
+    <result column="VILLNM" property="villnm" jdbcType="VARCHAR" />
+    <result column="AREA" property="area" jdbcType="DECIMAL" />
+    <result column="STCD" property="stcd" jdbcType="VARCHAR" />
+    <result column="USE_TYPE" property="useType" jdbcType="CHAR" />
+    <result column="FOR_OWN" property="forOwn" jdbcType="CHAR" />
+    <result column="FOR_USE" property="forUse" jdbcType="CHAR" />
+    <result column="TREE_OWN" property="treeOwn" jdbcType="CHAR" />
+    <result column="TREE_USE" property="treeUse" jdbcType="CHAR" />
+    <result column="TREE_OWNER" property="treeOwner" jdbcType="VARCHAR" />
+    <result column="FOUND_YEAR" property="foundYear" jdbcType="CHAR" />
+    <result column="MODTM" property="modtm" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TOWNCD, XBH, VILLNM, AREA, STCD, USE_TYPE, FOR_OWN, FOR_USE, TREE_OWN, TREE_USE, 
+    TREE_OWNER, FOUND_YEAR, MODTM
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.domain.FXbhBExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from F_XBH_B
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.example.domain.FXbhBKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from F_XBH_B
+    where TOWNCD = #{towncd,jdbcType=VARCHAR}
+      and XBH = #{xbh,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.example.domain.FXbhBKey" >
+    delete from F_XBH_B
+    where TOWNCD = #{towncd,jdbcType=VARCHAR}
+      and XBH = #{xbh,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.domain.FXbhBExample" >
+    delete from F_XBH_B
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.domain.FXbhB" >
+    insert into F_XBH_B (TOWNCD, XBH, VILLNM, 
+      AREA, STCD, USE_TYPE, FOR_OWN, 
+      FOR_USE, TREE_OWN, TREE_USE, TREE_OWNER, 
+      FOUND_YEAR, MODTM)
+    values (#{towncd,jdbcType=VARCHAR}, #{xbh,jdbcType=VARCHAR}, #{villnm,jdbcType=VARCHAR}, 
+      #{area,jdbcType=DECIMAL}, #{stcd,jdbcType=VARCHAR}, #{useType,jdbcType=CHAR}, #{forOwn,jdbcType=CHAR}, 
+      #{forUse,jdbcType=CHAR}, #{treeOwn,jdbcType=CHAR}, #{treeUse,jdbcType=CHAR}, #{treeOwner,jdbcType=VARCHAR}, 
+      #{foundYear,jdbcType=CHAR}, #{modtm,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.domain.FXbhB" >
+    insert into F_XBH_B
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="towncd != null" >
+        TOWNCD,
+      </if>
+      <if test="xbh != null" >
+        XBH,
+      </if>
+      <if test="villnm != null" >
+        VILLNM,
+      </if>
+      <if test="area != null" >
+        AREA,
+      </if>
+      <if test="stcd != null" >
+        STCD,
+      </if>
+      <if test="useType != null" >
+        USE_TYPE,
+      </if>
+      <if test="forOwn != null" >
+        FOR_OWN,
+      </if>
+      <if test="forUse != null" >
+        FOR_USE,
+      </if>
+      <if test="treeOwn != null" >
+        TREE_OWN,
+      </if>
+      <if test="treeUse != null" >
+        TREE_USE,
+      </if>
+      <if test="treeOwner != null" >
+        TREE_OWNER,
+      </if>
+      <if test="foundYear != null" >
+        FOUND_YEAR,
+      </if>
+      <if test="modtm != null" >
+        MODTM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="towncd != null" >
+        #{towncd,jdbcType=VARCHAR},
+      </if>
+      <if test="xbh != null" >
+        #{xbh,jdbcType=VARCHAR},
+      </if>
+      <if test="villnm != null" >
+        #{villnm,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=DECIMAL},
+      </if>
+      <if test="stcd != null" >
+        #{stcd,jdbcType=VARCHAR},
+      </if>
+      <if test="useType != null" >
+        #{useType,jdbcType=CHAR},
+      </if>
+      <if test="forOwn != null" >
+        #{forOwn,jdbcType=CHAR},
+      </if>
+      <if test="forUse != null" >
+        #{forUse,jdbcType=CHAR},
+      </if>
+      <if test="treeOwn != null" >
+        #{treeOwn,jdbcType=CHAR},
+      </if>
+      <if test="treeUse != null" >
+        #{treeUse,jdbcType=CHAR},
+      </if>
+      <if test="treeOwner != null" >
+        #{treeOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="foundYear != null" >
+        #{foundYear,jdbcType=CHAR},
+      </if>
+      <if test="modtm != null" >
+        #{modtm,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.domain.FXbhBExample" resultType="java.lang.Integer" >
+    select count(*) from F_XBH_B
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update F_XBH_B
+    <set >
+      <if test="record.towncd != null" >
+        TOWNCD = #{record.towncd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xbh != null" >
+        XBH = #{record.xbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.villnm != null" >
+        VILLNM = #{record.villnm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null" >
+        AREA = #{record.area,jdbcType=DECIMAL},
+      </if>
+      <if test="record.stcd != null" >
+        STCD = #{record.stcd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useType != null" >
+        USE_TYPE = #{record.useType,jdbcType=CHAR},
+      </if>
+      <if test="record.forOwn != null" >
+        FOR_OWN = #{record.forOwn,jdbcType=CHAR},
+      </if>
+      <if test="record.forUse != null" >
+        FOR_USE = #{record.forUse,jdbcType=CHAR},
+      </if>
+      <if test="record.treeOwn != null" >
+        TREE_OWN = #{record.treeOwn,jdbcType=CHAR},
+      </if>
+      <if test="record.treeUse != null" >
+        TREE_USE = #{record.treeUse,jdbcType=CHAR},
+      </if>
+      <if test="record.treeOwner != null" >
+        TREE_OWNER = #{record.treeOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.foundYear != null" >
+        FOUND_YEAR = #{record.foundYear,jdbcType=CHAR},
+      </if>
+      <if test="record.modtm != null" >
+        MODTM = #{record.modtm,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update F_XBH_B
+    set TOWNCD = #{record.towncd,jdbcType=VARCHAR},
+      XBH = #{record.xbh,jdbcType=VARCHAR},
+      VILLNM = #{record.villnm,jdbcType=VARCHAR},
+      AREA = #{record.area,jdbcType=DECIMAL},
+      STCD = #{record.stcd,jdbcType=VARCHAR},
+      USE_TYPE = #{record.useType,jdbcType=CHAR},
+      FOR_OWN = #{record.forOwn,jdbcType=CHAR},
+      FOR_USE = #{record.forUse,jdbcType=CHAR},
+      TREE_OWN = #{record.treeOwn,jdbcType=CHAR},
+      TREE_USE = #{record.treeUse,jdbcType=CHAR},
+      TREE_OWNER = #{record.treeOwner,jdbcType=VARCHAR},
+      FOUND_YEAR = #{record.foundYear,jdbcType=CHAR},
+      MODTM = #{record.modtm,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.domain.FXbhB" >
+    update F_XBH_B
+    <set >
+      <if test="villnm != null" >
+        VILLNM = #{villnm,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        AREA = #{area,jdbcType=DECIMAL},
+      </if>
+      <if test="stcd != null" >
+        STCD = #{stcd,jdbcType=VARCHAR},
+      </if>
+      <if test="useType != null" >
+        USE_TYPE = #{useType,jdbcType=CHAR},
+      </if>
+      <if test="forOwn != null" >
+        FOR_OWN = #{forOwn,jdbcType=CHAR},
+      </if>
+      <if test="forUse != null" >
+        FOR_USE = #{forUse,jdbcType=CHAR},
+      </if>
+      <if test="treeOwn != null" >
+        TREE_OWN = #{treeOwn,jdbcType=CHAR},
+      </if>
+      <if test="treeUse != null" >
+        TREE_USE = #{treeUse,jdbcType=CHAR},
+      </if>
+      <if test="treeOwner != null" >
+        TREE_OWNER = #{treeOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="foundYear != null" >
+        FOUND_YEAR = #{foundYear,jdbcType=CHAR},
+      </if>
+      <if test="modtm != null" >
+        MODTM = #{modtm,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where TOWNCD = #{towncd,jdbcType=VARCHAR}
+      and XBH = #{xbh,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.domain.FXbhB" >
+    update F_XBH_B
+    set VILLNM = #{villnm,jdbcType=VARCHAR},
+      AREA = #{area,jdbcType=DECIMAL},
+      STCD = #{stcd,jdbcType=VARCHAR},
+      USE_TYPE = #{useType,jdbcType=CHAR},
+      FOR_OWN = #{forOwn,jdbcType=CHAR},
+      FOR_USE = #{forUse,jdbcType=CHAR},
+      TREE_OWN = #{treeOwn,jdbcType=CHAR},
+      TREE_USE = #{treeUse,jdbcType=CHAR},
+      TREE_OWNER = #{treeOwner,jdbcType=VARCHAR},
+      FOUND_YEAR = #{foundYear,jdbcType=CHAR},
+      MODTM = #{modtm,jdbcType=TIMESTAMP}
+    where TOWNCD = #{towncd,jdbcType=VARCHAR}
+      and XBH = #{xbh,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: dev
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone:   http://user:123456@127.0.0.1:9011/eureka/,http://user:123456@127.0.0.1:9012/eureka/

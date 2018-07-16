@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.WpStsBMapper" >
+  <resultMap id="BaseResultMap" type="com.example.domain.WpStsB" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="STSNM" property="stsnm" jdbcType="VARCHAR" />
+    <result column="LOC" property="loc" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="LGTD" property="lgtd" jdbcType="DECIMAL" />
+    <result column="LTTD" property="lttd" jdbcType="DECIMAL" />
+    <result column="DDSTC" property="ddstc" jdbcType="DECIMAL" />
+    <result column="YDSTC" property="ydstc" jdbcType="DECIMAL" />
+    <result column="PROCESS" property="process" jdbcType="VARCHAR" />
+    <result column="TARGET" property="target" jdbcType="DECIMAL" />
+    <result column="RLNM" property="rlnm" jdbcType="VARCHAR" />
+    <result column="EMISTP" property="emistp" jdbcType="VARCHAR" />
+    <result column="PDOSOUR" property="pdosour" jdbcType="VARCHAR" />
+    <result column="INRVTP" property="inrvtp" jdbcType="VARCHAR" />
+    <result column="PDOSIZE" property="pdosize" jdbcType="VARCHAR" />
+    <result column="KEYPOLLU" property="keypollu" jdbcType="VARCHAR" />
+    <result column="ESSTYM" property="esstym" jdbcType="VARCHAR" />
+    <result column="CAPEX" property="capex" jdbcType="DECIMAL" />
+    <result column="FAREA" property="farea" jdbcType="DECIMAL" />
+    <result column="SAREA" property="sarea" jdbcType="DECIMAL" />
+    <result column="SERCOV" property="sercov" jdbcType="VARCHAR" />
+    <result column="SERPOP" property="serpop" jdbcType="DECIMAL" />
+    <result column="CURDEP" property="curdep" jdbcType="VARCHAR" />
+    <result column="BUILDDEP" property="builddep" jdbcType="VARCHAR" />
+    <result column="STTP" property="sttp" jdbcType="VARCHAR" />
+    <result column="ISAUTO" property="isauto" jdbcType="CHAR" />
+    <result column="PDOCD" property="pdocd" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, STSNM, LOC, ADDRESS, LGTD, LTTD, DDSTC, YDSTC, PROCESS, TARGET, RLNM, EMISTP, 
+    PDOSOUR, INRVTP, PDOSIZE, KEYPOLLU, ESSTYM, CAPEX, FAREA, SAREA, SERCOV, SERPOP, 
+    CURDEP, BUILDDEP, STTP, ISAUTO, PDOCD
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.domain.WpStsBExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from WP_STS_B
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from WP_STS_B
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from WP_STS_B
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.domain.WpStsBExample" >
+    delete from WP_STS_B
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.domain.WpStsB" >
+    insert into WP_STS_B (ID, STSNM, LOC, 
+      ADDRESS, LGTD, LTTD, 
+      DDSTC, YDSTC, PROCESS, 
+      TARGET, RLNM, EMISTP, 
+      PDOSOUR, INRVTP, PDOSIZE, 
+      KEYPOLLU, ESSTYM, CAPEX, 
+      FAREA, SAREA, SERCOV, 
+      SERPOP, CURDEP, BUILDDEP, 
+      STTP, ISAUTO, PDOCD)
+    values (#{id,jdbcType=VARCHAR}, #{stsnm,jdbcType=VARCHAR}, #{loc,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{lgtd,jdbcType=DECIMAL}, #{lttd,jdbcType=DECIMAL}, 
+      #{ddstc,jdbcType=DECIMAL}, #{ydstc,jdbcType=DECIMAL}, #{process,jdbcType=VARCHAR}, 
+      #{target,jdbcType=DECIMAL}, #{rlnm,jdbcType=VARCHAR}, #{emistp,jdbcType=VARCHAR}, 
+      #{pdosour,jdbcType=VARCHAR}, #{inrvtp,jdbcType=VARCHAR}, #{pdosize,jdbcType=VARCHAR}, 
+      #{keypollu,jdbcType=VARCHAR}, #{esstym,jdbcType=VARCHAR}, #{capex,jdbcType=DECIMAL}, 
+      #{farea,jdbcType=DECIMAL}, #{sarea,jdbcType=DECIMAL}, #{sercov,jdbcType=VARCHAR}, 
+      #{serpop,jdbcType=DECIMAL}, #{curdep,jdbcType=VARCHAR}, #{builddep,jdbcType=VARCHAR}, 
+      #{sttp,jdbcType=VARCHAR}, #{isauto,jdbcType=CHAR}, #{pdocd,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.domain.WpStsB" >
+    insert into WP_STS_B
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="stsnm != null" >
+        STSNM,
+      </if>
+      <if test="loc != null" >
+        LOC,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="lgtd != null" >
+        LGTD,
+      </if>
+      <if test="lttd != null" >
+        LTTD,
+      </if>
+      <if test="ddstc != null" >
+        DDSTC,
+      </if>
+      <if test="ydstc != null" >
+        YDSTC,
+      </if>
+      <if test="process != null" >
+        PROCESS,
+      </if>
+      <if test="target != null" >
+        TARGET,
+      </if>
+      <if test="rlnm != null" >
+        RLNM,
+      </if>
+      <if test="emistp != null" >
+        EMISTP,
+      </if>
+      <if test="pdosour != null" >
+        PDOSOUR,
+      </if>
+      <if test="inrvtp != null" >
+        INRVTP,
+      </if>
+      <if test="pdosize != null" >
+        PDOSIZE,
+      </if>
+      <if test="keypollu != null" >
+        KEYPOLLU,
+      </if>
+      <if test="esstym != null" >
+        ESSTYM,
+      </if>
+      <if test="capex != null" >
+        CAPEX,
+      </if>
+      <if test="farea != null" >
+        FAREA,
+      </if>
+      <if test="sarea != null" >
+        SAREA,
+      </if>
+      <if test="sercov != null" >
+        SERCOV,
+      </if>
+      <if test="serpop != null" >
+        SERPOP,
+      </if>
+      <if test="curdep != null" >
+        CURDEP,
+      </if>
+      <if test="builddep != null" >
+        BUILDDEP,
+      </if>
+      <if test="sttp != null" >
+        STTP,
+      </if>
+      <if test="isauto != null" >
+        ISAUTO,
+      </if>
+      <if test="pdocd != null" >
+        PDOCD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="stsnm != null" >
+        #{stsnm,jdbcType=VARCHAR},
+      </if>
+      <if test="loc != null" >
+        #{loc,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="lgtd != null" >
+        #{lgtd,jdbcType=DECIMAL},
+      </if>
+      <if test="lttd != null" >
+        #{lttd,jdbcType=DECIMAL},
+      </if>
+      <if test="ddstc != null" >
+        #{ddstc,jdbcType=DECIMAL},
+      </if>
+      <if test="ydstc != null" >
+        #{ydstc,jdbcType=DECIMAL},
+      </if>
+      <if test="process != null" >
+        #{process,jdbcType=VARCHAR},
+      </if>
+      <if test="target != null" >
+        #{target,jdbcType=DECIMAL},
+      </if>
+      <if test="rlnm != null" >
+        #{rlnm,jdbcType=VARCHAR},
+      </if>
+      <if test="emistp != null" >
+        #{emistp,jdbcType=VARCHAR},
+      </if>
+      <if test="pdosour != null" >
+        #{pdosour,jdbcType=VARCHAR},
+      </if>
+      <if test="inrvtp != null" >
+        #{inrvtp,jdbcType=VARCHAR},
+      </if>
+      <if test="pdosize != null" >
+        #{pdosize,jdbcType=VARCHAR},
+      </if>
+      <if test="keypollu != null" >
+        #{keypollu,jdbcType=VARCHAR},
+      </if>
+      <if test="esstym != null" >
+        #{esstym,jdbcType=VARCHAR},
+      </if>
+      <if test="capex != null" >
+        #{capex,jdbcType=DECIMAL},
+      </if>
+      <if test="farea != null" >
+        #{farea,jdbcType=DECIMAL},
+      </if>
+      <if test="sarea != null" >
+        #{sarea,jdbcType=DECIMAL},
+      </if>
+      <if test="sercov != null" >
+        #{sercov,jdbcType=VARCHAR},
+      </if>
+      <if test="serpop != null" >
+        #{serpop,jdbcType=DECIMAL},
+      </if>
+      <if test="curdep != null" >
+        #{curdep,jdbcType=VARCHAR},
+      </if>
+      <if test="builddep != null" >
+        #{builddep,jdbcType=VARCHAR},
+      </if>
+      <if test="sttp != null" >
+        #{sttp,jdbcType=VARCHAR},
+      </if>
+      <if test="isauto != null" >
+        #{isauto,jdbcType=CHAR},
+      </if>
+      <if test="pdocd != null" >
+        #{pdocd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.domain.WpStsBExample" resultType="java.lang.Integer" >
+    select count(*) from WP_STS_B
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update WP_STS_B
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stsnm != null" >
+        STSNM = #{record.stsnm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loc != null" >
+        LOC = #{record.loc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lgtd != null" >
+        LGTD = #{record.lgtd,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lttd != null" >
+        LTTD = #{record.lttd,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ddstc != null" >
+        DDSTC = #{record.ddstc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ydstc != null" >
+        YDSTC = #{record.ydstc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.process != null" >
+        PROCESS = #{record.process,jdbcType=VARCHAR},
+      </if>
+      <if test="record.target != null" >
+        TARGET = #{record.target,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rlnm != null" >
+        RLNM = #{record.rlnm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emistp != null" >
+        EMISTP = #{record.emistp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdosour != null" >
+        PDOSOUR = #{record.pdosour,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inrvtp != null" >
+        INRVTP = #{record.inrvtp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdosize != null" >
+        PDOSIZE = #{record.pdosize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keypollu != null" >
+        KEYPOLLU = #{record.keypollu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.esstym != null" >
+        ESSTYM = #{record.esstym,jdbcType=VARCHAR},
+      </if>
+      <if test="record.capex != null" >
+        CAPEX = #{record.capex,jdbcType=DECIMAL},
+      </if>
+      <if test="record.farea != null" >
+        FAREA = #{record.farea,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sarea != null" >
+        SAREA = #{record.sarea,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sercov != null" >
+        SERCOV = #{record.sercov,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serpop != null" >
+        SERPOP = #{record.serpop,jdbcType=DECIMAL},
+      </if>
+      <if test="record.curdep != null" >
+        CURDEP = #{record.curdep,jdbcType=VARCHAR},
+      </if>
+      <if test="record.builddep != null" >
+        BUILDDEP = #{record.builddep,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sttp != null" >
+        STTP = #{record.sttp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isauto != null" >
+        ISAUTO = #{record.isauto,jdbcType=CHAR},
+      </if>
+      <if test="record.pdocd != null" >
+        PDOCD = #{record.pdocd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update WP_STS_B
+    set ID = #{record.id,jdbcType=VARCHAR},
+      STSNM = #{record.stsnm,jdbcType=VARCHAR},
+      LOC = #{record.loc,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      LGTD = #{record.lgtd,jdbcType=DECIMAL},
+      LTTD = #{record.lttd,jdbcType=DECIMAL},
+      DDSTC = #{record.ddstc,jdbcType=DECIMAL},
+      YDSTC = #{record.ydstc,jdbcType=DECIMAL},
+      PROCESS = #{record.process,jdbcType=VARCHAR},
+      TARGET = #{record.target,jdbcType=DECIMAL},
+      RLNM = #{record.rlnm,jdbcType=VARCHAR},
+      EMISTP = #{record.emistp,jdbcType=VARCHAR},
+      PDOSOUR = #{record.pdosour,jdbcType=VARCHAR},
+      INRVTP = #{record.inrvtp,jdbcType=VARCHAR},
+      PDOSIZE = #{record.pdosize,jdbcType=VARCHAR},
+      KEYPOLLU = #{record.keypollu,jdbcType=VARCHAR},
+      ESSTYM = #{record.esstym,jdbcType=VARCHAR},
+      CAPEX = #{record.capex,jdbcType=DECIMAL},
+      FAREA = #{record.farea,jdbcType=DECIMAL},
+      SAREA = #{record.sarea,jdbcType=DECIMAL},
+      SERCOV = #{record.sercov,jdbcType=VARCHAR},
+      SERPOP = #{record.serpop,jdbcType=DECIMAL},
+      CURDEP = #{record.curdep,jdbcType=VARCHAR},
+      BUILDDEP = #{record.builddep,jdbcType=VARCHAR},
+      STTP = #{record.sttp,jdbcType=VARCHAR},
+      ISAUTO = #{record.isauto,jdbcType=CHAR},
+      PDOCD = #{record.pdocd,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.domain.WpStsB" >
+    update WP_STS_B
+    <set >
+      <if test="stsnm != null" >
+        STSNM = #{stsnm,jdbcType=VARCHAR},
+      </if>
+      <if test="loc != null" >
+        LOC = #{loc,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="lgtd != null" >
+        LGTD = #{lgtd,jdbcType=DECIMAL},
+      </if>
+      <if test="lttd != null" >
+        LTTD = #{lttd,jdbcType=DECIMAL},
+      </if>
+      <if test="ddstc != null" >
+        DDSTC = #{ddstc,jdbcType=DECIMAL},
+      </if>
+      <if test="ydstc != null" >
+        YDSTC = #{ydstc,jdbcType=DECIMAL},
+      </if>
+      <if test="process != null" >
+        PROCESS = #{process,jdbcType=VARCHAR},
+      </if>
+      <if test="target != null" >
+        TARGET = #{target,jdbcType=DECIMAL},
+      </if>
+      <if test="rlnm != null" >
+        RLNM = #{rlnm,jdbcType=VARCHAR},
+      </if>
+      <if test="emistp != null" >
+        EMISTP = #{emistp,jdbcType=VARCHAR},
+      </if>
+      <if test="pdosour != null" >
+        PDOSOUR = #{pdosour,jdbcType=VARCHAR},
+      </if>
+      <if test="inrvtp != null" >
+        INRVTP = #{inrvtp,jdbcType=VARCHAR},
+      </if>
+      <if test="pdosize != null" >
+        PDOSIZE = #{pdosize,jdbcType=VARCHAR},
+      </if>
+      <if test="keypollu != null" >
+        KEYPOLLU = #{keypollu,jdbcType=VARCHAR},
+      </if>
+      <if test="esstym != null" >
+        ESSTYM = #{esstym,jdbcType=VARCHAR},
+      </if>
+      <if test="capex != null" >
+        CAPEX = #{capex,jdbcType=DECIMAL},
+      </if>
+      <if test="farea != null" >
+        FAREA = #{farea,jdbcType=DECIMAL},
+      </if>
+      <if test="sarea != null" >
+        SAREA = #{sarea,jdbcType=DECIMAL},
+      </if>
+      <if test="sercov != null" >
+        SERCOV = #{sercov,jdbcType=VARCHAR},
+      </if>
+      <if test="serpop != null" >
+        SERPOP = #{serpop,jdbcType=DECIMAL},
+      </if>
+      <if test="curdep != null" >
+        CURDEP = #{curdep,jdbcType=VARCHAR},
+      </if>
+      <if test="builddep != null" >
+        BUILDDEP = #{builddep,jdbcType=VARCHAR},
+      </if>
+      <if test="sttp != null" >
+        STTP = #{sttp,jdbcType=VARCHAR},
+      </if>
+      <if test="isauto != null" >
+        ISAUTO = #{isauto,jdbcType=CHAR},
+      </if>
+      <if test="pdocd != null" >
+        PDOCD = #{pdocd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.domain.WpStsB" >
+    update WP_STS_B
+    set STSNM = #{stsnm,jdbcType=VARCHAR},
+      LOC = #{loc,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      LGTD = #{lgtd,jdbcType=DECIMAL},
+      LTTD = #{lttd,jdbcType=DECIMAL},
+      DDSTC = #{ddstc,jdbcType=DECIMAL},
+      YDSTC = #{ydstc,jdbcType=DECIMAL},
+      PROCESS = #{process,jdbcType=VARCHAR},
+      TARGET = #{target,jdbcType=DECIMAL},
+      RLNM = #{rlnm,jdbcType=VARCHAR},
+      EMISTP = #{emistp,jdbcType=VARCHAR},
+      PDOSOUR = #{pdosour,jdbcType=VARCHAR},
+      INRVTP = #{inrvtp,jdbcType=VARCHAR},
+      PDOSIZE = #{pdosize,jdbcType=VARCHAR},
+      KEYPOLLU = #{keypollu,jdbcType=VARCHAR},
+      ESSTYM = #{esstym,jdbcType=VARCHAR},
+      CAPEX = #{capex,jdbcType=DECIMAL},
+      FAREA = #{farea,jdbcType=DECIMAL},
+      SAREA = #{sarea,jdbcType=DECIMAL},
+      SERCOV = #{sercov,jdbcType=VARCHAR},
+      SERPOP = #{serpop,jdbcType=DECIMAL},
+      CURDEP = #{curdep,jdbcType=VARCHAR},
+      BUILDDEP = #{builddep,jdbcType=VARCHAR},
+      STTP = #{sttp,jdbcType=VARCHAR},
+      ISAUTO = #{isauto,jdbcType=CHAR},
+      PDOCD = #{pdocd,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
