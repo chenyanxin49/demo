@@ -14,6 +14,22 @@ public class UserA {
     private String name;
     private Integer age;
 
+    public UserA() {
+    }
+
+    public UserA(String name) {
+        this.name = name;
+    }
+
+    public UserA(Integer age) {
+        this.age = age;
+    }
+
+    public UserA(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
+
     public String getName() {
         return name;
     }

@@ -2,9 +2,15 @@ package com.example.controller;
 
 import com.example.domain.UserA;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.core.convert.converter.Converter;
 
 import java.security.Key;
+import java.time.Clock;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
@@ -25,7 +31,7 @@ import java.util.stream.Stream;
 public class DemoTest {
 
     public static void main(String[] args) {
-//        LocalDate localDate = equalsTest();
+//        equalsTest();
 //        iteratorTest();
 //        listSortTest();
 //        mapTest();
@@ -33,18 +39,43 @@ public class DemoTest {
 //        lambdaTest();
 //        reduceTest();
 //        mapOprTest();
-        operationTest();
+//        operationTest();
+        dateTest();
     }
 
     private static void operationTest() {
-        byte m=-8;
-        System.out.println("m的二 进 制码是："+Integer.toBinaryString(m));
-        System.out.println("m>>2的二进制码是："+Integer.toBinaryString(m>>3));
-        System.out.println("(m>>2)="+(m>>3));
-        System.out.println("m<<2的二进制码是："+Integer.toBinaryString(m<<2));
-        System.out.println("(m<<2)=:"+(m<<2));
-        System.out.println("m>>>2的二进制码是："+Integer.toBinaryString(m>>>2));
-        System.out.println(" m>>>2 :"+ (m>>>2));
+        byte m = -8;
+        System.out.println("m的二 进 制码是：" + Integer.toBinaryString(m));
+        System.out.println("m>>2的二进制码是：" + Integer.toBinaryString(m >> 3));
+        System.out.println("(m>>2)=" + (m >> 3));
+        System.out.println("m<<2的二进制码是：" + Integer.toBinaryString(m << 2));
+        System.out.println("(m<<2)=:" + (m << 2));
+        System.out.println("m>>>2的二进制码是：" + Integer.toBinaryString(m >>> 2));
+        System.out.println(" m>>>2 :" + (m >>> 2));
+    }
+
+    private static void dateTest() {
+        DateTimeFormatter germanFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+                        .withLocale(Locale.GERMAN);
+
+        LocalDate xmas = LocalDate.parse("24.12.2014", germanFormatter);
+//        System.out.println(xmas);
+
+        Date d = new Date();
+        d.setTime(d.getTime() - 24 * 60 * 60 * 1000);
+//        System.out.println(d);
+
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter df1 = DateTimeFormatter.ISO_DATE_TIME;
+        System.out.println(df1.parse("2011-12-03T10:15:30+01:00"));
+        System.out.println(df.parse("2012-07-01"));
+
+        LocalDate localDate = LocalDate.now();
+        LocalDateTime ld = LocalDateTime.now();
+        Instant i = Instant.now();
+//        System.out.println(i);
+//        System.out.println(df.format(localDate));
+
     }
 
     private static void reduceTest() {
@@ -58,7 +89,7 @@ public class DemoTest {
 //        System.out.println("Total : " + total);
 
         // New way:
-        double bill = costBeforeTax.stream().map((cost) -> cost + .12*cost)
+        double bill = costBeforeTax.stream().map((cost) -> cost + .12 * cost)
                 .reduce((sum, cost) -> sum + cost)
                 .get();
         System.out.println("Total : " + bill);
@@ -117,41 +148,68 @@ public class DemoTest {
     }
 
     private static void mapTest() {
-        Map<String, Integer> map = new HashMap<>(10000);
-        for (Integer i = 0; i < 10000; i++) {
-            map.put(i.toString(), i);
+        Map<Integer, String> map = new HashMap<>(10000);
+        for (Integer i = 0; i < 30; i++) {
+            map.put(i, i.toString());
         }
-        System.out.println("entrySet start : " + System.currentTimeMillis());
-        Set<Map.Entry<String, Integer>> entries = map.entrySet();
-        for (Map.Entry<String, Integer> entry : entries) {
-            String key = entry.getKey();
-            Integer value = entry.getValue();
-            System.out.println("key = " + key + " value = " + value);
-        }
-        System.out.println(map.size());
-        System.out.println("entrySet end : " + System.currentTimeMillis());
-        System.out.println("===========================");
-        Set<String> strings = map.keySet();
-        for (String string : strings) {
-            Integer integer = map.get(string);
-//            System.out.println("key = " + string + " value = " + integer);
-        }
-        System.out.println("===========================");
-        System.out.println("forEach start : " + System.currentTimeMillis());
-        map.forEach((k, v) ->
-                System.out.println("key = " + k + " value = " + v)
-        );
-        System.out.println("forEach end : " + System.currentTimeMillis());
+//        System.out.println("entrySet start : " + System.nanoTime());
+//        Set<Map.Entry<String, Integer>> entries = map.entrySet();
+//        for (Map.Entry<String, Integer> entry : entries) {
+//            String key = entry.getKey();
+//            Integer value = entry.getValue();
+//            System.out.println("key = " + key + " value = " + value);
+//        }
+//        System.out.println(map.size());
+//        System.out.println("entrySet end : " + System.nanoTime());
+//        System.out.println("===========================");
+//        Set<String> strings = map.keySet();
+//        for (String string : strings) {
+//            Integer integer = map.get(string);
+////            System.out.println("key = " + string + " value = " + integer);
+//        }
+//        System.out.println("===========================");
+//        System.out.println("forEach start : " + System.nanoTime());
+//        map.forEach((k, v) ->
+//                System.out.println("key = " + k + " value = " + v)
+//        );
+//        System.out.println("forEach end : " + System.nanoTime());
+//        map.computeIfPresent(3, (num, val) -> val + num);
+//        System.out.println(map.get(3));
+//
+//        map.computeIfPresent(9, (num, val) -> null);
+//        System.out.println(map.containsKey(9));
+//
+//        map.computeIfAbsent(23, num -> "val" + num);
+//        System.out.println(map.containsKey(23));
+//
+//        map.putIfAbsent(30, "bam");
+//        System.out.println(map.getOrDefault(30, "not found"));
+//        System.out.println(map.get(30));
+
+        map.merge(9, "concat", String::concat);
+        System.out.println(map.get(9));
+        map.put(9,map.get(9).concat("new"));
+        System.out.println(map.get(9));
     }
 
-    private static LocalDate equalsTest() {
+    private static void equalsTest() {
         Integer a = 15;
         Integer b = 15;
         boolean equals = a.equals(b);
-        System.out.println("== " + (a == b) + "equals " + equals);
-        Date d = new Date();
-        d.setTime(d.getTime() - 24 * 60 * 60 * 1000);
-        return LocalDate.now();
+//        System.out.println("== " + (a == b) + "equals " + equals);
+
+        Converter<String, Integer> converter = Integer::valueOf;
+        Integer converted = converter.convert("123");
+        System.out.println(converted);
+        Comparator<UserA> comparator = Comparator.comparingInt(UserA::getAge);
+
+        UserA p1 = new UserA("John", 1);
+        UserA p2 = new UserA("Alice", 1);
+
+        int compare = comparator.compare(p1, p2);// > 0
+        int compare1 = comparator.reversed().compare(p1, p2);// < 0
+        System.out.println(compare + "==" + compare1);
+
     }
 
     private static void listSortTest() {
