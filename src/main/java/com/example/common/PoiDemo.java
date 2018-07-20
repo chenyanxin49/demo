@@ -26,8 +26,12 @@ public class PoiDemo {
 
     private final Logger Log = LoggerFactory.getLogger(PoiDemo.class);
 
+    private final IPoiDemoService poiDemoService;
+
     @Autowired
-    private IPoiDemoService poiDemoService;
+    public PoiDemo(IPoiDemoService poiDemoService) {
+        this.poiDemoService = poiDemoService;
+    }
 
     /**
      * 批量区域数据导入
@@ -112,7 +116,6 @@ public class PoiDemo {
                 sb.setModtm(date);
 //                    sb.setLgtd(Double.parseDouble(lgtd));
 //                    sb.setLttd(Double.parseDouble(lttd));
-//                System.out.println("file = [" + sb );
                 num++ ;
 //                if (num == 2){
 //                    return null;

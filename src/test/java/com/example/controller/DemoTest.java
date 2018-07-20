@@ -89,9 +89,9 @@ public class DemoTest {
 //        System.out.println("Total : " + total);
 
         // New way:
-        double bill = costBeforeTax.stream().map((cost) -> cost + .12 * cost)
+        Double bill = costBeforeTax.stream().map((cost) -> cost + .12 * cost)
                 .reduce((sum, cost) -> sum + cost)
-                .get();
+                .orElse(null);
         System.out.println("Total : " + bill);
     }
 
