@@ -87,13 +87,13 @@ public class PoiDemo {
                 if (ttcd != null){
                     tcd = (long) ttcd.getNumericCellValue();
                 }
-                    sb.setTowncd(String.valueOf(tcd));
+                    sb.setAddvcd(String.valueOf(tcd));
 
                 Cell vnm = row.getCell(1);
                 if (vnm != null){
                     villNm = vnm.getStringCellValue();
                 }
-                    sb.setVillnm(villNm);
+                    sb.setAddvnm(villNm);
                     sb.setXbh(row.getCell(2).getStringCellValue());
                     sb.setArea(row.getCell(3).getNumericCellValue());
                     sb.setStcd(String.valueOf((int) row.getCell(4).getNumericCellValue()));

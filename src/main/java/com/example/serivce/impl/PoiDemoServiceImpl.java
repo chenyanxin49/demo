@@ -25,6 +25,9 @@ import java.util.List;
 @Service
 public class PoiDemoServiceImpl implements IPoiDemoService {
 
+    @Autowired
+    private FXbhBMapper fXbhBMapper;
+
     /**
      * 获取sqlsession
      * 从spring注入原有的sqlSessionTemplate
@@ -44,7 +47,7 @@ public class PoiDemoServiceImpl implements IPoiDemoService {
         // 如果自动提交设置为true,将无法控制提交的条数，改为最后统一提交，可能导致内存溢出
         SqlSession session = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);
         // 通过新的session获取mapper
-        FXbhBMapper fXbhBMapper = session.getMapper(FXbhBMapper.class);
+        fXbhBMapper = session.getMapper(FXbhBMapper.class);
         try {
             for (FXbhB area : areas) {
                 i++;
@@ -61,6 +64,7 @@ public class PoiDemoServiceImpl implements IPoiDemoService {
             // 清理缓存，防止溢出
             System.out.println("成功 = [" + i + "]");
         } catch (Exception e) {
+            e.printStackTrace();
             // 没有提交的数据可以回滚
             session.rollback();
         } finally {

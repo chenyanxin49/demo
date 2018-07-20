@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class FXbhB extends FXbhBKey {
     @ApiModelProperty(value = "村名称")
-    private String villnm;
+    private String addvnm;
 
     @ApiModelProperty(value = "面积（公顷）")
     private Double area;
@@ -38,20 +38,26 @@ public class FXbhB extends FXbhBKey {
     @ApiModelProperty(value = "修改时间")
     private Date modtm;
 
+    @ApiModelProperty(value = "林龄")
+    private Integer treeAge;
+
+    @ApiModelProperty(value = "龄组（1幼龄林，2中龄林，3近熟林，4成熟林，5过熟林）")
+    private String ageGroup;
+
     /**
      * 村名称
-     * @return VILLNM 村名称
+     * @return ADDVNM 村名称
      */
-    public String getVillnm() {
-        return villnm;
+    public String getAddvnm() {
+        return addvnm;
     }
 
     /**
      * 村名称
-     * @param villnm 村名称
+     * @param addvnm 村名称
      */
-    public void setVillnm(String villnm) {
-        this.villnm = villnm == null ? null : villnm.trim();
+    public void setAddvnm(String addvnm) {
+        this.addvnm = addvnm == null ? null : addvnm.trim();
     }
 
     /**
@@ -212,5 +218,64 @@ public class FXbhB extends FXbhBKey {
      */
     public void setModtm(Date modtm) {
         this.modtm = modtm;
+    }
+
+    /**
+     * 林龄
+     * @return TREE_AGE 林龄
+     */
+    public Integer getTreeAge() {
+        return treeAge;
+    }
+
+    /**
+     * 林龄
+     * @param treeAge 林龄
+     */
+    public void setTreeAge(Integer treeAge) {
+        this.treeAge = treeAge;
+    }
+
+    /**
+     * 龄组（1幼龄林，2中龄林，3近熟林，4成熟林，5过熟林）
+     * @return AGE_GROUP 龄组（1幼龄林，2中龄林，3近熟林，4成熟林，5过熟林）
+     */
+    public String getAgeGroup() {
+        return ageGroup;
+    }
+
+    /**
+     * 龄组（1幼龄林，2中龄林，3近熟林，4成熟林，5过熟林）
+     * @param ageGroup 龄组（1幼龄林，2中龄林，3近熟林，4成熟林，5过熟林）
+     */
+    public void setAgeGroup(String ageGroup) {
+        this.ageGroup = ageGroup == null ? null : ageGroup.trim();
+    }
+
+    /**
+     *
+     * @mbg.generated 2018-07-20
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", addvnm=").append(addvnm);
+        sb.append(", area=").append(area);
+        sb.append(", stcd=").append(stcd);
+        sb.append(", useType=").append(useType);
+        sb.append(", forOwn=").append(forOwn);
+        sb.append(", forUse=").append(forUse);
+        sb.append(", treeOwn=").append(treeOwn);
+        sb.append(", treeUse=").append(treeUse);
+        sb.append(", treeOwner=").append(treeOwner);
+        sb.append(", foundYear=").append(foundYear);
+        sb.append(", modtm=").append(modtm);
+        sb.append(", treeAge=").append(treeAge);
+        sb.append(", ageGroup=").append(ageGroup);
+        sb.append("]");
+        return sb.toString();
     }
 }

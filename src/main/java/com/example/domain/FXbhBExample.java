@@ -22,7 +22,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     public FXbhBExample() {
         oredCriteria = new ArrayList<Criteria>();
@@ -30,7 +30,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -38,7 +38,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -46,7 +46,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -54,7 +54,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     public boolean isDistinct() {
         return distinct;
@@ -62,7 +62,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -70,7 +70,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -78,7 +78,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -88,7 +88,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -100,7 +100,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -109,7 +109,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     public void clear() {
         oredCriteria.clear();
@@ -118,7 +118,7 @@ public class FXbhBExample {
     }
 
     /**
-     * F_XBH_B 2018-07-16
+     * F_XBH_B 2018-07-20
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -161,73 +161,73 @@ public class FXbhBExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andTowncdIsNull() {
-            addCriterion("TOWNCD is null");
+        public Criteria andAddvcdIsNull() {
+            addCriterion("ADDVCD is null");
             return (Criteria) this;
         }
 
-        public Criteria andTowncdIsNotNull() {
-            addCriterion("TOWNCD is not null");
+        public Criteria andAddvcdIsNotNull() {
+            addCriterion("ADDVCD is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTowncdEqualTo(String value) {
-            addCriterion("TOWNCD =", value, "towncd");
+        public Criteria andAddvcdEqualTo(String value) {
+            addCriterion("ADDVCD =", value, "addvcd");
             return (Criteria) this;
         }
 
-        public Criteria andTowncdNotEqualTo(String value) {
-            addCriterion("TOWNCD <>", value, "towncd");
+        public Criteria andAddvcdNotEqualTo(String value) {
+            addCriterion("ADDVCD <>", value, "addvcd");
             return (Criteria) this;
         }
 
-        public Criteria andTowncdGreaterThan(String value) {
-            addCriterion("TOWNCD >", value, "towncd");
+        public Criteria andAddvcdGreaterThan(String value) {
+            addCriterion("ADDVCD >", value, "addvcd");
             return (Criteria) this;
         }
 
-        public Criteria andTowncdGreaterThanOrEqualTo(String value) {
-            addCriterion("TOWNCD >=", value, "towncd");
+        public Criteria andAddvcdGreaterThanOrEqualTo(String value) {
+            addCriterion("ADDVCD >=", value, "addvcd");
             return (Criteria) this;
         }
 
-        public Criteria andTowncdLessThan(String value) {
-            addCriterion("TOWNCD <", value, "towncd");
+        public Criteria andAddvcdLessThan(String value) {
+            addCriterion("ADDVCD <", value, "addvcd");
             return (Criteria) this;
         }
 
-        public Criteria andTowncdLessThanOrEqualTo(String value) {
-            addCriterion("TOWNCD <=", value, "towncd");
+        public Criteria andAddvcdLessThanOrEqualTo(String value) {
+            addCriterion("ADDVCD <=", value, "addvcd");
             return (Criteria) this;
         }
 
-        public Criteria andTowncdLike(String value) {
-            addCriterion("TOWNCD like", value, "towncd");
+        public Criteria andAddvcdLike(String value) {
+            addCriterion("ADDVCD like", value, "addvcd");
             return (Criteria) this;
         }
 
-        public Criteria andTowncdNotLike(String value) {
-            addCriterion("TOWNCD not like", value, "towncd");
+        public Criteria andAddvcdNotLike(String value) {
+            addCriterion("ADDVCD not like", value, "addvcd");
             return (Criteria) this;
         }
 
-        public Criteria andTowncdIn(List<String> values) {
-            addCriterion("TOWNCD in", values, "towncd");
+        public Criteria andAddvcdIn(List<String> values) {
+            addCriterion("ADDVCD in", values, "addvcd");
             return (Criteria) this;
         }
 
-        public Criteria andTowncdNotIn(List<String> values) {
-            addCriterion("TOWNCD not in", values, "towncd");
+        public Criteria andAddvcdNotIn(List<String> values) {
+            addCriterion("ADDVCD not in", values, "addvcd");
             return (Criteria) this;
         }
 
-        public Criteria andTowncdBetween(String value1, String value2) {
-            addCriterion("TOWNCD between", value1, value2, "towncd");
+        public Criteria andAddvcdBetween(String value1, String value2) {
+            addCriterion("ADDVCD between", value1, value2, "addvcd");
             return (Criteria) this;
         }
 
-        public Criteria andTowncdNotBetween(String value1, String value2) {
-            addCriterion("TOWNCD not between", value1, value2, "towncd");
+        public Criteria andAddvcdNotBetween(String value1, String value2) {
+            addCriterion("ADDVCD not between", value1, value2, "addvcd");
             return (Criteria) this;
         }
 
@@ -301,73 +301,73 @@ public class FXbhBExample {
             return (Criteria) this;
         }
 
-        public Criteria andVillnmIsNull() {
-            addCriterion("VILLNM is null");
+        public Criteria andAddvnmIsNull() {
+            addCriterion("ADDVNM is null");
             return (Criteria) this;
         }
 
-        public Criteria andVillnmIsNotNull() {
-            addCriterion("VILLNM is not null");
+        public Criteria andAddvnmIsNotNull() {
+            addCriterion("ADDVNM is not null");
             return (Criteria) this;
         }
 
-        public Criteria andVillnmEqualTo(String value) {
-            addCriterion("VILLNM =", value, "villnm");
+        public Criteria andAddvnmEqualTo(String value) {
+            addCriterion("ADDVNM =", value, "addvnm");
             return (Criteria) this;
         }
 
-        public Criteria andVillnmNotEqualTo(String value) {
-            addCriterion("VILLNM <>", value, "villnm");
+        public Criteria andAddvnmNotEqualTo(String value) {
+            addCriterion("ADDVNM <>", value, "addvnm");
             return (Criteria) this;
         }
 
-        public Criteria andVillnmGreaterThan(String value) {
-            addCriterion("VILLNM >", value, "villnm");
+        public Criteria andAddvnmGreaterThan(String value) {
+            addCriterion("ADDVNM >", value, "addvnm");
             return (Criteria) this;
         }
 
-        public Criteria andVillnmGreaterThanOrEqualTo(String value) {
-            addCriterion("VILLNM >=", value, "villnm");
+        public Criteria andAddvnmGreaterThanOrEqualTo(String value) {
+            addCriterion("ADDVNM >=", value, "addvnm");
             return (Criteria) this;
         }
 
-        public Criteria andVillnmLessThan(String value) {
-            addCriterion("VILLNM <", value, "villnm");
+        public Criteria andAddvnmLessThan(String value) {
+            addCriterion("ADDVNM <", value, "addvnm");
             return (Criteria) this;
         }
 
-        public Criteria andVillnmLessThanOrEqualTo(String value) {
-            addCriterion("VILLNM <=", value, "villnm");
+        public Criteria andAddvnmLessThanOrEqualTo(String value) {
+            addCriterion("ADDVNM <=", value, "addvnm");
             return (Criteria) this;
         }
 
-        public Criteria andVillnmLike(String value) {
-            addCriterion("VILLNM like", value, "villnm");
+        public Criteria andAddvnmLike(String value) {
+            addCriterion("ADDVNM like", value, "addvnm");
             return (Criteria) this;
         }
 
-        public Criteria andVillnmNotLike(String value) {
-            addCriterion("VILLNM not like", value, "villnm");
+        public Criteria andAddvnmNotLike(String value) {
+            addCriterion("ADDVNM not like", value, "addvnm");
             return (Criteria) this;
         }
 
-        public Criteria andVillnmIn(List<String> values) {
-            addCriterion("VILLNM in", values, "villnm");
+        public Criteria andAddvnmIn(List<String> values) {
+            addCriterion("ADDVNM in", values, "addvnm");
             return (Criteria) this;
         }
 
-        public Criteria andVillnmNotIn(List<String> values) {
-            addCriterion("VILLNM not in", values, "villnm");
+        public Criteria andAddvnmNotIn(List<String> values) {
+            addCriterion("ADDVNM not in", values, "addvnm");
             return (Criteria) this;
         }
 
-        public Criteria andVillnmBetween(String value1, String value2) {
-            addCriterion("VILLNM between", value1, value2, "villnm");
+        public Criteria andAddvnmBetween(String value1, String value2) {
+            addCriterion("ADDVNM between", value1, value2, "addvnm");
             return (Criteria) this;
         }
 
-        public Criteria andVillnmNotBetween(String value1, String value2) {
-            addCriterion("VILLNM not between", value1, value2, "villnm");
+        public Criteria andAddvnmNotBetween(String value1, String value2) {
+            addCriterion("ADDVNM not between", value1, value2, "addvnm");
             return (Criteria) this;
         }
 
@@ -1050,6 +1050,136 @@ public class FXbhBExample {
             addCriterion("MODTM not between", value1, value2, "modtm");
             return (Criteria) this;
         }
+
+        public Criteria andTreeAgeIsNull() {
+            addCriterion("TREE_AGE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreeAgeIsNotNull() {
+            addCriterion("TREE_AGE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreeAgeEqualTo(Integer value) {
+            addCriterion("TREE_AGE =", value, "treeAge");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreeAgeNotEqualTo(Integer value) {
+            addCriterion("TREE_AGE <>", value, "treeAge");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreeAgeGreaterThan(Integer value) {
+            addCriterion("TREE_AGE >", value, "treeAge");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreeAgeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("TREE_AGE >=", value, "treeAge");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreeAgeLessThan(Integer value) {
+            addCriterion("TREE_AGE <", value, "treeAge");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreeAgeLessThanOrEqualTo(Integer value) {
+            addCriterion("TREE_AGE <=", value, "treeAge");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreeAgeIn(List<Integer> values) {
+            addCriterion("TREE_AGE in", values, "treeAge");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreeAgeNotIn(List<Integer> values) {
+            addCriterion("TREE_AGE not in", values, "treeAge");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreeAgeBetween(Integer value1, Integer value2) {
+            addCriterion("TREE_AGE between", value1, value2, "treeAge");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreeAgeNotBetween(Integer value1, Integer value2) {
+            addCriterion("TREE_AGE not between", value1, value2, "treeAge");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGroupIsNull() {
+            addCriterion("AGE_GROUP is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGroupIsNotNull() {
+            addCriterion("AGE_GROUP is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGroupEqualTo(String value) {
+            addCriterion("AGE_GROUP =", value, "ageGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGroupNotEqualTo(String value) {
+            addCriterion("AGE_GROUP <>", value, "ageGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGroupGreaterThan(String value) {
+            addCriterion("AGE_GROUP >", value, "ageGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGroupGreaterThanOrEqualTo(String value) {
+            addCriterion("AGE_GROUP >=", value, "ageGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGroupLessThan(String value) {
+            addCriterion("AGE_GROUP <", value, "ageGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGroupLessThanOrEqualTo(String value) {
+            addCriterion("AGE_GROUP <=", value, "ageGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGroupLike(String value) {
+            addCriterion("AGE_GROUP like", value, "ageGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGroupNotLike(String value) {
+            addCriterion("AGE_GROUP not like", value, "ageGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGroupIn(List<String> values) {
+            addCriterion("AGE_GROUP in", values, "ageGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGroupNotIn(List<String> values) {
+            addCriterion("AGE_GROUP not in", values, "ageGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGroupBetween(String value1, String value2) {
+            addCriterion("AGE_GROUP between", value1, value2, "ageGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeGroupNotBetween(String value1, String value2) {
+            addCriterion("AGE_GROUP not between", value1, value2, "ageGroup");
+            return (Criteria) this;
+        }
     }
 
     /**
@@ -1063,7 +1193,7 @@ public class FXbhBExample {
     }
 
     /**
-     * F_XBH_B 2018-07-16
+     * F_XBH_B 2018-07-20
      */
     public static class Criterion {
         private String condition;

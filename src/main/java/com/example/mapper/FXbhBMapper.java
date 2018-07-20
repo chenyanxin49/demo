@@ -14,67 +14,67 @@ import java.util.List;
 public interface FXbhBMapper {
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
-    int countByExample(FXbhBExample example);
+    long countByExample(FXbhBExample example);
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     int deleteByExample(FXbhBExample example);
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     int deleteByPrimaryKey(FXbhBKey key);
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     int insert(FXbhB record);
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     int insertSelective(FXbhB record);
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     List<FXbhB> selectByExample(FXbhBExample example);
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     FXbhB selectByPrimaryKey(FXbhBKey key);
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     int updateByExampleSelective(@Param("record") FXbhB record, @Param("example") FXbhBExample example);
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     int updateByExample(@Param("record") FXbhB record, @Param("example") FXbhBExample example);
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     int updateByPrimaryKeySelective(FXbhB record);
 
     /**
      *
-     * @mbggenerated 2018-07-16
+     * @mbg.generated 2018-07-20
      */
     int updateByPrimaryKey(FXbhB record);
 }
