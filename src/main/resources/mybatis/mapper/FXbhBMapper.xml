@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.example.domain.FXbhB">
     <id column="ADDVCD" jdbcType="VARCHAR" property="addvcd" />
     <id column="XBH" jdbcType="VARCHAR" property="xbh" />
+    <id column="COUNT_YEAR" jdbcType="CHAR" property="countYear" />
     <result column="ADDVNM" jdbcType="VARCHAR" property="addvnm" />
     <result column="AREA" jdbcType="DECIMAL" property="area" />
     <result column="STCD" jdbcType="VARCHAR" property="stcd" />
@@ -17,6 +18,7 @@
     <result column="MODTM" jdbcType="TIMESTAMP" property="modtm" />
     <result column="TREE_AGE" jdbcType="DECIMAL" property="treeAge" />
     <result column="AGE_GROUP" jdbcType="CHAR" property="ageGroup" />
+    <result column="CREATETM" jdbcType="TIMESTAMP" property="createtm" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -77,8 +79,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ADDVCD, XBH, ADDVNM, AREA, STCD, USE_TYPE, FOR_OWN, FOR_USE, TREE_OWN, TREE_USE, 
-    TREE_OWNER, FOUND_YEAR, MODTM, TREE_AGE, AGE_GROUP
+    ADDVCD, XBH, COUNT_YEAR, ADDVNM, AREA, STCD, USE_TYPE, FOR_OWN, FOR_USE, TREE_OWN, 
+    TREE_USE, TREE_OWNER, FOUND_YEAR, MODTM, TREE_AGE, AGE_GROUP, CREATETM
   </sql>
   <select id="selectByExample" parameterType="com.example.domain.FXbhBExample" resultMap="BaseResultMap">
     select
@@ -100,11 +102,13 @@
     from F_XBH_B
     where ADDVCD = #{addvcd,jdbcType=VARCHAR}
       and XBH = #{xbh,jdbcType=VARCHAR}
+      and COUNT_YEAR = #{countYear,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.example.domain.FXbhBKey">
     delete from F_XBH_B
     where ADDVCD = #{addvcd,jdbcType=VARCHAR}
       and XBH = #{xbh,jdbcType=VARCHAR}
+      and COUNT_YEAR = #{countYear,jdbcType=CHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.example.domain.FXbhBExample">
     delete from F_XBH_B
@@ -113,16 +117,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.example.domain.FXbhB">
-    insert into F_XBH_B (ADDVCD, XBH, ADDVNM, 
-      AREA, STCD, USE_TYPE, FOR_OWN, 
-      FOR_USE, TREE_OWN, TREE_USE, TREE_OWNER, 
-      FOUND_YEAR, MODTM, TREE_AGE, 
-      AGE_GROUP)
-    values (#{addvcd,jdbcType=VARCHAR}, #{xbh,jdbcType=VARCHAR}, #{addvnm,jdbcType=VARCHAR}, 
-      #{area,jdbcType=DECIMAL}, #{stcd,jdbcType=VARCHAR}, #{useType,jdbcType=CHAR}, #{forOwn,jdbcType=CHAR}, 
-      #{forUse,jdbcType=CHAR}, #{treeOwn,jdbcType=CHAR}, #{treeUse,jdbcType=CHAR}, #{treeOwner,jdbcType=VARCHAR}, 
-      #{foundYear,jdbcType=CHAR}, #{modtm,jdbcType=TIMESTAMP}, #{treeAge,jdbcType=DECIMAL}, 
-      #{ageGroup,jdbcType=CHAR})
+    insert into F_XBH_B (ADDVCD, XBH, COUNT_YEAR, 
+      ADDVNM, AREA, STCD, 
+      USE_TYPE, FOR_OWN, FOR_USE, TREE_OWN, 
+      TREE_USE, TREE_OWNER, FOUND_YEAR, 
+      MODTM, TREE_AGE, AGE_GROUP, 
+      CREATETM)
+    values (#{addvcd,jdbcType=VARCHAR}, #{xbh,jdbcType=VARCHAR}, #{countYear,jdbcType=CHAR}, 
+      #{addvnm,jdbcType=VARCHAR}, #{area,jdbcType=DECIMAL}, #{stcd,jdbcType=VARCHAR}, 
+      #{useType,jdbcType=CHAR}, #{forOwn,jdbcType=CHAR}, #{forUse,jdbcType=CHAR}, #{treeOwn,jdbcType=CHAR}, 
+      #{treeUse,jdbcType=CHAR}, #{treeOwner,jdbcType=VARCHAR}, #{foundYear,jdbcType=CHAR}, 
+      #{modtm,jdbcType=TIMESTAMP}, #{treeAge,jdbcType=DECIMAL}, #{ageGroup,jdbcType=CHAR}, 
+      #{createtm,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.example.domain.FXbhB">
     insert into F_XBH_B
@@ -132,6 +138,9 @@
       </if>
       <if test="xbh != null">
         XBH,
+      </if>
+      <if test="countYear != null">
+        COUNT_YEAR,
       </if>
       <if test="addvnm != null">
         ADDVNM,
@@ -172,6 +181,9 @@
       <if test="ageGroup != null">
         AGE_GROUP,
       </if>
+      <if test="createtm != null">
+        CREATETM,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="addvcd != null">
@@ -179,6 +191,9 @@
       </if>
       <if test="xbh != null">
         #{xbh,jdbcType=VARCHAR},
+      </if>
+      <if test="countYear != null">
+        #{countYear,jdbcType=CHAR},
       </if>
       <if test="addvnm != null">
         #{addvnm,jdbcType=VARCHAR},
@@ -219,6 +234,9 @@
       <if test="ageGroup != null">
         #{ageGroup,jdbcType=CHAR},
       </if>
+      <if test="createtm != null">
+        #{createtm,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.example.domain.FXbhBExample" resultType="java.lang.Long">
@@ -235,6 +253,9 @@
       </if>
       <if test="record.xbh != null">
         XBH = #{record.xbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countYear != null">
+        COUNT_YEAR = #{record.countYear,jdbcType=CHAR},
       </if>
       <if test="record.addvnm != null">
         ADDVNM = #{record.addvnm,jdbcType=VARCHAR},
@@ -275,6 +296,9 @@
       <if test="record.ageGroup != null">
         AGE_GROUP = #{record.ageGroup,jdbcType=CHAR},
       </if>
+      <if test="record.createtm != null">
+        CREATETM = #{record.createtm,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -284,6 +308,7 @@
     update F_XBH_B
     set ADDVCD = #{record.addvcd,jdbcType=VARCHAR},
       XBH = #{record.xbh,jdbcType=VARCHAR},
+      COUNT_YEAR = #{record.countYear,jdbcType=CHAR},
       ADDVNM = #{record.addvnm,jdbcType=VARCHAR},
       AREA = #{record.area,jdbcType=DECIMAL},
       STCD = #{record.stcd,jdbcType=VARCHAR},
@@ -296,7 +321,8 @@
       FOUND_YEAR = #{record.foundYear,jdbcType=CHAR},
       MODTM = #{record.modtm,jdbcType=TIMESTAMP},
       TREE_AGE = #{record.treeAge,jdbcType=DECIMAL},
-      AGE_GROUP = #{record.ageGroup,jdbcType=CHAR}
+      AGE_GROUP = #{record.ageGroup,jdbcType=CHAR},
+      CREATETM = #{record.createtm,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -343,9 +369,13 @@
       <if test="ageGroup != null">
         AGE_GROUP = #{ageGroup,jdbcType=CHAR},
       </if>
+      <if test="createtm != null">
+        CREATETM = #{createtm,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where ADDVCD = #{addvcd,jdbcType=VARCHAR}
       and XBH = #{xbh,jdbcType=VARCHAR}
+      and COUNT_YEAR = #{countYear,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.domain.FXbhB">
     update F_XBH_B
@@ -361,8 +391,10 @@
       FOUND_YEAR = #{foundYear,jdbcType=CHAR},
       MODTM = #{modtm,jdbcType=TIMESTAMP},
       TREE_AGE = #{treeAge,jdbcType=DECIMAL},
-      AGE_GROUP = #{ageGroup,jdbcType=CHAR}
+      AGE_GROUP = #{ageGroup,jdbcType=CHAR},
+      CREATETM = #{createtm,jdbcType=TIMESTAMP}
     where ADDVCD = #{addvcd,jdbcType=VARCHAR}
       and XBH = #{xbh,jdbcType=VARCHAR}
+      and COUNT_YEAR = #{countYear,jdbcType=CHAR}
   </update>
 </mapper>

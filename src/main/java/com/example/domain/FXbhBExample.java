@@ -22,7 +22,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbg.generated 2018-07-20
+     * @mbg.generated 2018-07-22
      */
     public FXbhBExample() {
         oredCriteria = new ArrayList<Criteria>();
@@ -30,7 +30,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbg.generated 2018-07-20
+     * @mbg.generated 2018-07-22
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -38,7 +38,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbg.generated 2018-07-20
+     * @mbg.generated 2018-07-22
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -46,7 +46,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbg.generated 2018-07-20
+     * @mbg.generated 2018-07-22
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -54,7 +54,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbg.generated 2018-07-20
+     * @mbg.generated 2018-07-22
      */
     public boolean isDistinct() {
         return distinct;
@@ -62,7 +62,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbg.generated 2018-07-20
+     * @mbg.generated 2018-07-22
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -70,7 +70,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbg.generated 2018-07-20
+     * @mbg.generated 2018-07-22
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -78,7 +78,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbg.generated 2018-07-20
+     * @mbg.generated 2018-07-22
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -88,7 +88,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbg.generated 2018-07-20
+     * @mbg.generated 2018-07-22
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -100,7 +100,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbg.generated 2018-07-20
+     * @mbg.generated 2018-07-22
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -109,7 +109,7 @@ public class FXbhBExample {
 
     /**
      *
-     * @mbg.generated 2018-07-20
+     * @mbg.generated 2018-07-22
      */
     public void clear() {
         oredCriteria.clear();
@@ -118,7 +118,7 @@ public class FXbhBExample {
     }
 
     /**
-     * F_XBH_B 2018-07-20
+     * F_XBH_B 2018-07-22
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -298,6 +298,76 @@ public class FXbhBExample {
 
         public Criteria andXbhNotBetween(String value1, String value2) {
             addCriterion("XBH not between", value1, value2, "xbh");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountYearIsNull() {
+            addCriterion("COUNT_YEAR is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountYearIsNotNull() {
+            addCriterion("COUNT_YEAR is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountYearEqualTo(String value) {
+            addCriterion("COUNT_YEAR =", value, "countYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountYearNotEqualTo(String value) {
+            addCriterion("COUNT_YEAR <>", value, "countYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountYearGreaterThan(String value) {
+            addCriterion("COUNT_YEAR >", value, "countYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountYearGreaterThanOrEqualTo(String value) {
+            addCriterion("COUNT_YEAR >=", value, "countYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountYearLessThan(String value) {
+            addCriterion("COUNT_YEAR <", value, "countYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountYearLessThanOrEqualTo(String value) {
+            addCriterion("COUNT_YEAR <=", value, "countYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountYearLike(String value) {
+            addCriterion("COUNT_YEAR like", value, "countYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountYearNotLike(String value) {
+            addCriterion("COUNT_YEAR not like", value, "countYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountYearIn(List<String> values) {
+            addCriterion("COUNT_YEAR in", values, "countYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountYearNotIn(List<String> values) {
+            addCriterion("COUNT_YEAR not in", values, "countYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountYearBetween(String value1, String value2) {
+            addCriterion("COUNT_YEAR between", value1, value2, "countYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountYearNotBetween(String value1, String value2) {
+            addCriterion("COUNT_YEAR not between", value1, value2, "countYear");
             return (Criteria) this;
         }
 
@@ -1180,6 +1250,66 @@ public class FXbhBExample {
             addCriterion("AGE_GROUP not between", value1, value2, "ageGroup");
             return (Criteria) this;
         }
+
+        public Criteria andCreatetmIsNull() {
+            addCriterion("CREATETM is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetmIsNotNull() {
+            addCriterion("CREATETM is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetmEqualTo(Date value) {
+            addCriterion("CREATETM =", value, "createtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetmNotEqualTo(Date value) {
+            addCriterion("CREATETM <>", value, "createtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetmGreaterThan(Date value) {
+            addCriterion("CREATETM >", value, "createtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetmGreaterThanOrEqualTo(Date value) {
+            addCriterion("CREATETM >=", value, "createtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetmLessThan(Date value) {
+            addCriterion("CREATETM <", value, "createtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetmLessThanOrEqualTo(Date value) {
+            addCriterion("CREATETM <=", value, "createtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetmIn(List<Date> values) {
+            addCriterion("CREATETM in", values, "createtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetmNotIn(List<Date> values) {
+            addCriterion("CREATETM not in", values, "createtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetmBetween(Date value1, Date value2) {
+            addCriterion("CREATETM between", value1, value2, "createtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetmNotBetween(Date value1, Date value2) {
+            addCriterion("CREATETM not between", value1, value2, "createtm");
+            return (Criteria) this;
+        }
     }
 
     /**
@@ -1193,7 +1323,7 @@ public class FXbhBExample {
     }
 
     /**
-     * F_XBH_B 2018-07-20
+     * F_XBH_B 2018-07-22
      */
     public static class Criterion {
         private String condition;

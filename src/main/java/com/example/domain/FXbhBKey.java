@@ -9,6 +9,9 @@ public class FXbhBKey {
     @ApiModelProperty(value = "小班号")
     private String xbh;
 
+    @ApiModelProperty(value = "数据统计年份")
+    private String countYear;
+
     /**
      * 村镇代码
      * @return ADDVCD 村镇代码
@@ -42,8 +45,24 @@ public class FXbhBKey {
     }
 
     /**
+     * 数据统计年份
+     * @return COUNT_YEAR 数据统计年份
+     */
+    public String getCountYear() {
+        return countYear;
+    }
+
+    /**
+     * 数据统计年份
+     * @param countYear 数据统计年份
+     */
+    public void setCountYear(String countYear) {
+        this.countYear = countYear == null ? null : countYear.trim();
+    }
+
+    /**
      *
-     * @mbg.generated 2018-07-20
+     * @mbg.generated 2018-07-22
      */
     @Override
     public String toString() {
@@ -53,6 +72,7 @@ public class FXbhBKey {
         sb.append("Hash = ").append(hashCode());
         sb.append(", addvcd=").append(addvcd);
         sb.append(", xbh=").append(xbh);
+        sb.append(", countYear=").append(countYear);
         sb.append("]");
         return sb.toString();
     }

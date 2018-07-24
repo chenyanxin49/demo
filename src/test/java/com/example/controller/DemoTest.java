@@ -1,20 +1,17 @@
 package com.example.controller;
 
 import com.example.domain.UserA;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.convert.converter.Converter;
 
-import java.security.Key;
-import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.*;
-import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -40,7 +37,8 @@ public class DemoTest {
 //        reduceTest();
 //        mapOprTest();
 //        operationTest();
-        dateTest();
+//        dateTest();
+
     }
 
     private static void operationTest() {
@@ -56,7 +54,7 @@ public class DemoTest {
 
     private static void dateTest() {
         DateTimeFormatter germanFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
-                        .withLocale(Locale.GERMAN);
+                .withLocale(Locale.GERMAN);
 
         LocalDate xmas = LocalDate.parse("24.12.2014", germanFormatter);
 //        System.out.println(xmas);
@@ -112,6 +110,23 @@ public class DemoTest {
 
         System.out.println("Print language whose length greater than 4:");
         complexFilter(languages, (str) -> str.length() > 4, (str) -> str.endsWith("a"));
+
+        List<String> names = Arrays.asList("Jack", "Jill", "Nate", "Kara", "Kim", "Jullie", "Paul", "Peter");
+        System.out.println(
+                names.stream()
+                        .filter(name -> name.length() == 4)
+                        .collect(Collectors.joining(", ")));
+        int sum1 = IntStream.iterate(7, e -> e - 1)
+                .limit(7)
+                .sum();
+        System.out.println(sum1);
+
+        System.out.println(
+                names.stream()
+                        .filter(name -> name.startsWith("J"))
+                        .filter(name -> name.length() > 3)
+                        .map(String::toUpperCase)
+                        .collect(Collectors.joining(", ")));
     }
 
     private static void filter(List<String> names, Predicate<String> condition) {
@@ -143,7 +158,9 @@ public class DemoTest {
         for (Integer i = 0; i < 10; i++) {
             map.put(i.toString(), i);
         }
-        Map.Entry<String, Integer> r = map.entrySet().stream().max(Comparator.comparing(Map.Entry::getValue)).get();
+        Map.Entry<String, Integer> r = map.entrySet().stream().max(Comparator.comparing(Map.Entry::getValue)).orElse(null);
+        // 用get需要保证有值，否则会抛出异常
+//        Map.Entry<String, Integer> r = map.entrySet().stream().max(Comparator.comparing(Map.Entry::getValue)).get();
         System.out.println(r);
     }
 
@@ -188,7 +205,7 @@ public class DemoTest {
 
         map.merge(9, "concat", String::concat);
         System.out.println(map.get(9));
-        map.put(9,map.get(9).concat("new"));
+        map.put(9, map.get(9).concat("new"));
         System.out.println(map.get(9));
     }
 
@@ -221,27 +238,29 @@ public class DemoTest {
         List<UserA> l = new ArrayList<>();
         l.add(u1);
         l.add(u2);
-        l.sort((o1, o2) ->
-                {
-                    if (o1.getAge() > o2.getAge()) {
-                        return 1;
-                    } else if (o1.getAge() < o2.getAge()) {
-                        return -1;
-                    } else {
-                        return 0;
-                    }
-                }
-        );
-
-        l.sort((o1, o2) ->
-                {
-                    return o1.getAge().compareTo(o2.getAge());
-                }
-        );
-
-        l.sort(Comparator.comparing(UserA::getAge));
-
-        l.forEach(System.out::println);
+//        l.sort((o1, o2) ->
+//                {
+//                    if (o1.getAge() > o2.getAge()) {
+//                        return 1;
+//                    } else if (o1.getAge() < o2.getAge()) {
+//                        return -1;
+//                    } else {
+//                        return 0;
+//                    }
+//                }
+//        );
+        // 上面可以简化为
+//        l.sort((o1, o2) ->
+//                {
+//                    return o1.getAge().compareTo(o2.getAge());
+//                }
+//        );
+        // 再次简化为
+//        l.sort(Comparator.comparing(UserA::getAge));
+        // 遍历输出
+//        l.forEach(System.out::println);
+        // 还可以用流写成
+        l.stream().sorted((o1, o2) -> o2.getAge().compareTo(o1.getAge())).forEach(System.out::println);
 
 //        Comparator<UserA> comparator = new Comparator<UserA>() {
 //            @Override
@@ -256,29 +275,31 @@ public class DemoTest {
 //            }
 //        };
 //        l.sort(comparator);
-        System.out.println("args = [" + l + "]");
+//        System.out.println("args = [" + l + "]");
     }
 
     private static void iteratorTest() {
         List<String> list = new ArrayList<>();
         list.add("1");
         list.add("2");
-        Integer n = 1;
-//        for (String item : list) {
-//            if (n.toString().equals(item)) {
-//                list.remove(item);
-//                n++;
-//            }
-//        }
-        Iterator<String> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            String next = iterator.next();
-            if (n.toString().equals(next)) {
-                list.remove(next);
-//                iterator.remove();
+        Integer n = 2;
+        // 并发修改时，如果只有两个元素，删除第一个元素不会报错，删除第一个元素后指标为1，长度为1，
+        // 结束循环，没有机会进入next()方法，所以不会抛出异常
+        for (String item : list) {
+            if (n.toString().equals(item)) {
+                list.remove(item);
                 n++;
             }
         }
+//        Iterator<String> iterator = list.iterator();
+//        while (iterator.hasNext()) {
+//            String next = iterator.next();
+//            if (n.toString().equals(next)) {
+//                list.remove(next);
+////                iterator.remove();
+//                n++;
+//            }
+//        }
         System.out.println(list.size());
     }
 

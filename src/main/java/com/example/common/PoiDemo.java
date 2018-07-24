@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.example.domain.FXbhB;
-import com.example.domain.WpStsB;
 import com.example.serivce.IPoiDemoService;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -114,6 +113,7 @@ public class PoiDemo {
                 }
                 sb.setFoundYear(String.valueOf(year));
                 sb.setModtm(date);
+                sb.setCountYear("2017");
 //                    sb.setLgtd(Double.parseDouble(lgtd));
 //                    sb.setLttd(Double.parseDouble(lttd));
                 num++ ;

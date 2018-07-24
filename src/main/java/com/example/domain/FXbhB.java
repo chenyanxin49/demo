@@ -14,7 +14,7 @@ public class FXbhB extends FXbhBKey {
     @ApiModelProperty(value = "优势树种 (F_SCS_B)")
     private String stcd;
 
-    @ApiModelProperty(value = "森林用途 （1-公益林，2-商品林）")
+    @ApiModelProperty(value = "森林用途 （0-其他，1-公益林，2-商品林）")
     private String useType;
 
     @ApiModelProperty(value = "林地所有权(1-国有，2-集体，3-个人）")
@@ -43,6 +43,9 @@ public class FXbhB extends FXbhBKey {
 
     @ApiModelProperty(value = "龄组（1幼龄林，2中龄林，3近熟林，4成熟林，5过熟林）")
     private String ageGroup;
+
+    @ApiModelProperty(value = "创建时间")
+    private Date createtm;
 
     /**
      * 村名称
@@ -93,16 +96,16 @@ public class FXbhB extends FXbhBKey {
     }
 
     /**
-     * 森林用途 （1-公益林，2-商品林）
-     * @return USE_TYPE 森林用途 （1-公益林，2-商品林）
+     * 森林用途 （0-其他，1-公益林，2-商品林）
+     * @return USE_TYPE 森林用途 （0-其他，1-公益林，2-商品林）
      */
     public String getUseType() {
         return useType;
     }
 
     /**
-     * 森林用途 （1-公益林，2-商品林）
-     * @param useType 森林用途 （1-公益林，2-商品林）
+     * 森林用途 （0-其他，1-公益林，2-商品林）
+     * @param useType 森林用途 （0-其他，1-公益林，2-商品林）
      */
     public void setUseType(String useType) {
         this.useType = useType == null ? null : useType.trim();
@@ -253,8 +256,24 @@ public class FXbhB extends FXbhBKey {
     }
 
     /**
+     * 创建时间
+     * @return CREATETM 创建时间
+     */
+    public Date getCreatetm() {
+        return createtm;
+    }
+
+    /**
+     * 创建时间
+     * @param createtm 创建时间
+     */
+    public void setCreatetm(Date createtm) {
+        this.createtm = createtm;
+    }
+
+    /**
      *
-     * @mbg.generated 2018-07-20
+     * @mbg.generated 2018-07-22
      */
     @Override
     public String toString() {
@@ -275,6 +294,7 @@ public class FXbhB extends FXbhBKey {
         sb.append(", modtm=").append(modtm);
         sb.append(", treeAge=").append(treeAge);
         sb.append(", ageGroup=").append(ageGroup);
+        sb.append(", createtm=").append(createtm);
         sb.append("]");
         return sb.toString();
     }

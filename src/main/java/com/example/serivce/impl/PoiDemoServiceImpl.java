@@ -1,9 +1,7 @@
 package com.example.serivce.impl;
 
 import com.example.domain.FXbhB;
-import com.example.domain.WpStsB;
 import com.example.mapper.FXbhBMapper;
-import com.example.mapper.WpStsBMapper;
 import com.example.serivce.IPoiDemoService;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;

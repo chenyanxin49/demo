@@ -1,7 +1,6 @@
 package com.example.serivce;
 
 import com.example.domain.FXbhB;
-import com.example.domain.WpStsB;
 
 import java.util.List;
 
