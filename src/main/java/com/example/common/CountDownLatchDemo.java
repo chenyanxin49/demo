@@ -37,8 +37,8 @@ public class CountDownLatchDemo {
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("demo-pool-%d").build();
 
         // 手动设置特定的线程池
-        ExecutorService exe = new ThreadPoolExecutor(PLAYER_AMOUNT, PLAYER_AMOUNT + 2, 0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+        ExecutorService exe = new ThreadPoolExecutor(PLAYER_AMOUNT, PLAYER_AMOUNT, 0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
         /*
          * 　　1、线程池刚创建时，里面没有一个线程。任务队列是作为参数传进来的。不过，就算队列里面有任务，线程池也不会马上执行它们。
          *
@@ -61,7 +61,7 @@ public class CountDownLatchDemo {
          *      那么当加入 20 个任务时，执行的顺序就是这样的：首先执行任务 1、2、3，然后任务 4~13 被放入队列。这时候队列满了，
          *      任务 14、15、16 会被马上执行，而任务 17~20 则会抛出异常。最终顺序是：1、2、3、14、15、16、4、5、6、7、8、9、10、11、12、13。
          *
-         * int corePoolSize,
+         *                    int corePoolSize,
                               int maximumPoolSize,
                               long keepAliveTime,
                               TimeUnit unit,

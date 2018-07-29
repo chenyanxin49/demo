@@ -1,16 +1,27 @@
 package com.example.controller;
 
-import com.example.domain.UserA;
+import com.example.domain.Bar;
+import com.example.domain.Foo;
+import com.example.domain.Person;
 import org.springframework.core.convert.converter.Converter;
 
-import java.time.Instant;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.nio.file.FileVisitOption;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.MessageFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import java.time.temporal.TemporalAdjusters;
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -38,7 +49,239 @@ public class DemoTest {
 //        mapOprTest();
 //        operationTest();
 //        dateTest();
+//        dateTest();
+//        flatMapTest();
+//        threadTest();
+//        executorsTest();
+//        invokeAllTest();
+//        invokeAnyTest();
+//        scheduledExecutorTest();
+//        m1((Integer) 1);
+//        formatter();
+//        stringFormat();
+//        messageFormat();
+        printf();
 
+    }
+
+    public void uncaughtException(Thread t, Throwable e) {
+        System.err.printf("%s: %s at line %d of %s%n",
+                t.getName(),
+                e.toString(),
+                e.getStackTrace()[0].getLineNumber(),
+                e.getStackTrace()[0].getFileName());
+    }
+
+    private static void printf() {
+        //printf
+        String filename = "E:\\123.txt";
+        try {
+            File file = new File(filename);
+            FileReader fileReader = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fileReader);
+            String line;
+            int i = 1;
+            while ((line = reader.readLine()) != null) {
+                System.out.printf("Line %d: %s%n", i++, line);
+            }
+
+            Files.walk(Paths.get("target"), FileVisitOption.FOLLOW_LINKS).forEach(System.out::println);
+        } catch (Exception e) {
+            System.err.printf("Unable to open file named '%s': %s",
+                    filename, e.getMessage());
+        }
+    }
+
+    private static void stringFormat() {
+        // Format a string containing a date.
+        Calendar c = new GregorianCalendar(1995, Calendar.MAY, 23);
+        String s = String.format("Duke's Birthday: %1$tm %1$te,%1$tY", c);
+        // -> s == "Duke's Birthday: May 23, 1995"
+        System.out.println(s);
+    }
+
+    private static void formatter() {
+        StringBuilder sb = new StringBuilder();
+        // Send all output to the Appendable object sb
+        Formatter formatter = new Formatter(sb, Locale.US);
+        // Explicit argument indices may be used to re-order output.
+        formatter.format("%4$2s %3$2s %2$2s %1$2s", "a", "b", "c", "d");
+        // -> " d  c  b  a"
+        // Optional locale as the first argument can be used to get
+        // locale-specific formatting of numbers.  The precision and width can be
+        // given to round and align the value.
+        formatter.format(Locale.FRANCE, "e = %+10.4f", Math.E);
+        // -> "e =    +2,7183"
+        // The '(' numeric flag may be used to format negative numbers with
+        // parentheses rather than a minus sign.  Group separators are
+        // automatically inserted.
+        formatter.format("Amount gained or lost since last statement: $ %(,.2f", 6217.58);
+        // -> "Amount gained or lost since last statement: $ (6,217.58)"
+    }
+
+    private static void messageFormat() {
+        String msg = "欢迎光临，当前（{0}）等待的业务受理的顾客有{1}位，请排号办理业务！";
+        MessageFormat mf = new MessageFormat(msg);
+        String fmsg = mf.format(new Object[]{new Date(), 35});
+        System.out.println(fmsg);
+    }
+
+    /**
+     * 包装类型高于基本类型，传参优先考虑基本类型
+     */
+    private static void m1(Integer i) {
+        System.out.println("this is integer");
+    }
+
+    private static void m1(double d) {
+        System.out.println("this is double");
+    }
+
+    private static void scheduledExecutorTest() {
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+
+        Runnable task = () -> System.out.println("Scheduling: " + System.nanoTime());
+        ScheduledFuture<?> future = executor.schedule(task, 3, TimeUnit.SECONDS);
+
+        try {
+            TimeUnit.MILLISECONDS.sleep(1337);
+            long remainingDelay = future.getDelay(TimeUnit.MILLISECONDS);
+            System.out.println("Remaining Delay: " + remainingDelay);
+            executor.shutdownNow();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static Callable<String> callable(String result, long sleepSeconds) {
+        return () -> {
+            TimeUnit.SECONDS.sleep(sleepSeconds);
+            return result;
+        };
+    }
+
+    private static void invokeAnyTest() {
+        ExecutorService executor = Executors.newWorkStealingPool();
+
+        List<Callable<String>> callables = Arrays.asList(
+                callable("task1", 2),
+                callable("task2", 1),
+                callable("task3", 3));
+
+        try {
+            String result = executor.invokeAny(callables);
+            System.out.println(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void invokeAllTest() {
+        ExecutorService executor = Executors.newWorkStealingPool();
+        List<Callable<String>> callables = Arrays.asList(
+                () -> "task1",
+                () -> "task2",
+                () -> "task3"
+        );
+
+        try {
+            executor.invokeAll(callables).stream()
+                    .map(future -> {
+                        try {
+                            return future.get();
+                        } catch (Exception e) {
+                            throw new IllegalStateException(e);
+                        }
+                    })
+                    .forEach(System.out::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void executorsTest() {
+//        ExecutorService executor = Executors.newSingleThreadExecutor();
+//        executor.submit(() -> {
+//            String threadName = Thread.currentThread().getName();
+//            System.out.println("Hello " + threadName);
+//        });
+
+        Callable<Integer> task = () -> {
+            try {
+                TimeUnit.SECONDS.sleep(2);
+                return 123;
+            } catch (InterruptedException e) {
+                throw new IllegalStateException("task interrupted", e);
+            }
+        };
+
+        ExecutorService executor = Executors.newFixedThreadPool(1);
+        Future<Integer> future = executor.submit(task);
+
+        System.out.println("future done? " + future.isDone());
+
+        try {
+            Integer result = future.get(1, TimeUnit.SECONDS);
+
+            System.out.println("future done? " + future.isDone());
+            System.out.println("result: " + result);
+            System.out.println("attempt to shutdown executor");
+            executor.shutdown();
+            executor.awaitTermination(5, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            System.err.println("tasks interrupted");
+            e.printStackTrace();
+        } finally {
+            if (!executor.isTerminated()) {
+                System.err.println("cancel non-finished tasks");
+            }
+            executor.shutdownNow();
+            System.out.println("shutdown finished");
+        }
+    }
+
+    private static void threadTest() {
+        Runnable task = () -> {
+            try {
+                String name = Thread.currentThread().getName();
+                System.out.println("Foo " + name);
+                TimeUnit.SECONDS.sleep(1);
+                System.out.println("Bar " + name);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
+
+        task.run();
+
+        Thread thread = new Thread(task);
+        thread.start();
+
+        System.out.println("Done!");
+    }
+
+    private static void flatMapTest() {
+//        List<Foo> foos = new ArrayList<>();
+//          // create foos
+//        IntStream
+//                .range(1, 4)
+//                .forEach(i -> foos.add(new Foo("Foo" + i)));
+//          // create bars
+//        foos.forEach(f ->
+//                IntStream
+//                        .range(1, 4)
+//                        .forEach(i -> f.getBars().add(new Bar("Bar" + i + " <- " + f.getName()))));
+//        foos.stream()
+//                .flatMap(foo -> foo.getBars().stream())
+//                .forEach(bar -> System.out.println(bar.getName()));
+
+        IntStream.range(1, 4)
+                .mapToObj(i -> new Foo("Foo" + i))
+                .peek(f -> IntStream.range(1, 4)
+                        .mapToObj(i -> new Bar("Bar" + i + " <- " + f.getName()))
+                        .forEach(f.getBars()::add))
+                .flatMap(f -> f.getBars().stream())
+                .forEach(b -> System.out.println(b.getName()));
     }
 
     private static void operationTest() {
@@ -53,26 +296,44 @@ public class DemoTest {
     }
 
     private static void dateTest() {
-        DateTimeFormatter germanFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
-                .withLocale(Locale.GERMAN);
-
-        LocalDate xmas = LocalDate.parse("24.12.2014", germanFormatter);
+//        DateTimeFormatter germanFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+//                .withLocale(Locale.GERMAN);
+//
+//        LocalDate xmas = LocalDate.parse("24.12.2014", germanFormatter);
 //        System.out.println(xmas);
 
-        Date d = new Date();
-        d.setTime(d.getTime() - 24 * 60 * 60 * 1000);
+//        Date d = new Date();
+//        d.setTime(d.getTime() - 24 * 60 * 60 * 1000);
 //        System.out.println(d);
 
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter df1 = DateTimeFormatter.ISO_DATE_TIME;
-        System.out.println(df1.parse("2011-12-03T10:15:30+01:00"));
-        System.out.println(df.parse("2012-07-01"));
+//        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        DateTimeFormatter df1 = DateTimeFormatter.ISO_DATE_TIME;
+//        System.out.println(df1.parse("2011-12-03T10:15:30+01:00"));
+//        System.out.println(df.parse("2012-07-01"));
 
         LocalDate localDate = LocalDate.now();
-        LocalDateTime ld = LocalDateTime.now();
-        Instant i = Instant.now();
-//        System.out.println(i);
+//        LocalDateTime ld = LocalDateTime.now();
+//        Instant i = Instant.now();
+        System.out.println(localDate.toString().substring(0, 7));
 //        System.out.println(df.format(localDate));
+        LocalDate firstDayOfThisMonth = localDate.with(TemporalAdjusters.firstDayOfMonth());
+        System.out.println(firstDayOfThisMonth);
+
+        // 取本月第2天：
+        LocalDate secondDayOfThisMonth = localDate.withDayOfMonth(2);
+        System.out.println(secondDayOfThisMonth);
+
+        // 取本月最后一天，再也不用计算是28，29，30还是31：
+        LocalDate lastDayOfThisMonth = localDate.with(TemporalAdjusters.lastDayOfMonth());
+        System.out.println(lastDayOfThisMonth);
+
+        // 取下一天：
+        LocalDate nextDay = lastDayOfThisMonth.plusDays(1);
+        System.out.println(nextDay);
+
+        // 取2015年1月第一个周一，这个计算用Calendar要死掉很多脑细胞：
+        LocalDate firstMondayOf2015 = LocalDate.parse("2015-01-01").with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
+        System.out.println(firstMondayOf2015);
 
     }
 
@@ -91,6 +352,20 @@ public class DemoTest {
                 .reduce((sum, cost) -> sum + cost)
                 .orElse(null);
         System.out.println("Total : " + bill);
+    }
+
+    private static void filter(List<String> names, Predicate<String> condition) {
+        for (String name : names) {
+            if (condition.test(name)) {
+                System.out.println(name + " ");
+            }
+        }
+    }
+
+    private static void complexFilter(List<String> names, Predicate<String> condition, Predicate<String> condition1) {
+        names.stream()
+                .filter(condition.and(condition1))
+                .forEach(System.out::println);
     }
 
     private static void lambdaTest() {
@@ -129,28 +404,50 @@ public class DemoTest {
                         .collect(Collectors.joining(", ")));
     }
 
-    private static void filter(List<String> names, Predicate<String> condition) {
-        for (String name : names) {
-            if (condition.test(name)) {
-                System.out.println(name + " ");
-            }
-        }
-    }
-
-    private static void complexFilter(List<String> names, Predicate<String> condition, Predicate<String> condition1) {
-        names.stream()
-                .filter(condition.and(condition1))
-                .forEach(System.out::println);
-    }
-
     private static void streamTest() {
 //        IntStream.of(1, 2, 3).forEach(System.out::println);
 //        IntStream.range(1, 3).forEach(System.out::println);
 //        IntStream.rangeClosed(1, 3).forEach(System.out::println);
         Random seed = new Random();
-        seed.nextInt();
-        Supplier<Integer> random = seed::nextInt;
-        Stream.generate(random).limit(10).forEach(System.out::println);
+        Supplier<Integer> random = () -> seed.nextInt(3) + 1;
+        Stream.generate(random).limit(3).forEach(System.out::println);
+
+        List<Person> persons = Arrays.asList(
+                new Person("Max", 18),
+                new Person("Peter", 23),
+                new Person("Pamela", 23),
+                new Person("David", 12));
+        List<Person> filtered =
+                persons
+                        .stream()
+                        .filter(p -> p.getName().startsWith("P"))
+                        .collect(Collectors.toList());
+        System.out.println(filtered);    // [Peter, Pamela]
+
+        Map<Integer, List<Person>> personsByAge = persons
+                .stream()
+                .collect(Collectors.groupingBy(Person::getAge));
+        personsByAge
+                .forEach((age, p) -> System.out.format("age %s: %s\n", age, p));
+
+        String phrase = persons
+                .stream()
+                .filter(p -> p.getAge() >= 18)
+                .map(Person::getName)
+                .collect(Collectors.joining(" and ", "In Germany ", " are of legal age."));
+        System.out.println(phrase);
+
+        // 需要传递一个收集器的四个组成部分：供应器、累加器、组合器和终止器。
+        Collector<Person, StringJoiner, String> personNameCollector =
+                Collector.of(
+                        () -> new StringJoiner(" | "),          // supplier
+                        (j, p) -> j.add(p.getName().toUpperCase()),  // accumulator
+                        StringJoiner::merge,                        // combiner (j1, j2) -> j1.merge(j2)
+                        StringJoiner::toString);                // finisher
+        String names = persons
+                .stream()
+                .collect(personNameCollector);
+        System.out.println(names);  // MAX | PETER | PAMELA | DAVID
     }
 
     private static void mapOprTest() {
@@ -160,8 +457,39 @@ public class DemoTest {
         }
         Map.Entry<String, Integer> r = map.entrySet().stream().max(Comparator.comparing(Map.Entry::getValue)).orElse(null);
         // 用get需要保证有值，否则会抛出异常
-//        Map.Entry<String, Integer> r = map.entrySet().stream().max(Comparator.comparing(Map.Entry::getValue)).get();
+        map.entrySet().stream().max(Comparator.comparing(Map.Entry::getValue)).ifPresent(System.out::println);
+
         System.out.println(r);
+
+//        Stream.of("d2", "a2", "b1", "b3", "c")
+//                .filter(s -> {
+//                    System.out.println("filter: " + s);
+//                    return s.startsWith("a");
+//                })
+//                .sorted((s1, s2) -> {
+//                    System.out.printf("sort: %s; %s\n", s1, s2);
+//                    return s1.compareTo(s2);
+//                })
+//                .map(s -> {
+//                    System.out.println("map: " + s);
+//                    return s.toUpperCase();
+//                })
+//                .forEach(s -> System.out.println("forEach: " + s));
+        Stream<String> stream = Stream.of("d2", "a2", "b1", "b3", "c")
+                .filter(s -> {
+                    System.out.println("filter: " + s);
+                    return s.startsWith("a");
+                });
+        boolean a = stream.anyMatch(s -> true);    // ok
+//        a = stream.noneMatch(s -> true);   // exception
+
+        Supplier<Stream<String>> streamSupplier = () -> Stream.of("d2", "a2", "b1", "b3", "c")
+                .filter(s -> {
+                    System.out.println("filter: " + s);
+                    return s.startsWith("a");
+                });
+        a = streamSupplier.get().anyMatch(s -> true);   // ok
+        a = streamSupplier.get().noneMatch(s -> true);  // ok
     }
 
     private static void mapTest() {
@@ -218,10 +546,10 @@ public class DemoTest {
         Converter<String, Integer> converter = Integer::valueOf;
         Integer converted = converter.convert("123");
         System.out.println(converted);
-        Comparator<UserA> comparator = Comparator.comparingInt(UserA::getAge);
+        Comparator<Person> comparator = Comparator.comparingInt(Person::getAge);
 
-        UserA p1 = new UserA("John", 1);
-        UserA p2 = new UserA("Alice", 1);
+        Person p1 = new Person("John", 1);
+        Person p2 = new Person("Alice", 1);
 
         int compare = comparator.compare(p1, p2);// > 0
         int compare1 = comparator.reversed().compare(p1, p2);// < 0
@@ -230,12 +558,12 @@ public class DemoTest {
     }
 
     private static void listSortTest() {
-        UserA u1 = new UserA();
-        UserA u2 = new UserA();
+        Person u1 = new Person();
+        Person u2 = new Person();
         u1.setAge(1);
         u2.setAge(2);
 
-        List<UserA> l = new ArrayList<>();
+        List<Person> l = new ArrayList<>();
         l.add(u1);
         l.add(u2);
 //        l.sort((o1, o2) ->
@@ -256,15 +584,15 @@ public class DemoTest {
 //                }
 //        );
         // 再次简化为
-//        l.sort(Comparator.comparing(UserA::getAge));
+//        l.sort(Comparator.comparing(Person::getAge));
         // 遍历输出
 //        l.forEach(System.out::println);
         // 还可以用流写成
         l.stream().sorted((o1, o2) -> o2.getAge().compareTo(o1.getAge())).forEach(System.out::println);
 
-//        Comparator<UserA> comparator = new Comparator<UserA>() {
+//        Comparator<Person> comparator = new Comparator<Person>() {
 //            @Override
-//            public int compare(UserA o1, UserA o2) {
+//            public int compare(Person o1, Person o2) {
 //                if (o2.getAge() > o1.getAge()) {
 //                    return 1;
 //                } else if (o2.getAge() < o1.getAge()) {

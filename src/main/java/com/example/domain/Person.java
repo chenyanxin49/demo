@@ -8,24 +8,24 @@ package com.example.domain;
  * Time     :       10:48
  * Version  :       1.0
  * Company  :       北京太比雅科技(武汉研发中心)
- * UserA
+ * Person
  */
-public class UserA {
+public class Person {
     private String name;
     private Integer age;
 
-    public UserA() {
+    public Person() {
     }
 
-    public UserA(String name) {
+    public Person(String name) {
         this.name = name;
     }
 
-    public UserA(Integer age) {
+    public Person(Integer age) {
         this.age = age;
     }
 
-    public UserA(String name, Integer age) {
+    public Person(String name, Integer age) {
         this.name = name;
         this.age = age;
     }
@@ -48,7 +48,7 @@ public class UserA {
 
     @Override
     public String toString() {
-        return "UserA{" +
+        return "Person{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
                 '}';

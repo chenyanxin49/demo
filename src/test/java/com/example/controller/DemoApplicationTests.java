@@ -1,8 +1,6 @@
 package com.example.controller;
 
-import com.example.DemoApplication;
 import com.example.common.PoiDemo;
-import com.example.domain.UserA;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
