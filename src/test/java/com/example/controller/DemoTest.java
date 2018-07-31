@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.domain.Bar;
+import com.example.domain.Demo;
 import com.example.domain.Foo;
 import com.example.domain.Person;
 import org.springframework.core.convert.converter.Converter;
@@ -8,17 +9,21 @@ import org.springframework.core.convert.converter.Converter;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.VarHandle;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.IntBuffer;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
@@ -60,8 +65,89 @@ public class DemoTest {
 //        formatter();
 //        stringFormat();
 //        messageFormat();
-        printf();
+//        printf();
+//        useByteBuffer();
+//        byteOrder();
+//        compact();
+//        viewBuffer();
+//        testProcessHandle();
+        VariableHandlesTest();
+    }
 
+    private static void VariableHandlesTest() {
+        try {
+            Demo instance = new Demo();
+            System.out.println(instance);
+            VarHandle arrayVarHandle = MethodHandles.arrayElementVarHandle(int[].class);
+
+            // 访问public成员 proteced成员
+            VarHandle countHandle = MethodHandles.lookup()
+                    .in(Demo.class)
+                    .findVarHandle(Demo.class, "count", int.class);
+            countHandle.set(instance, 99);
+
+            // 访问private成员
+            countHandle = MethodHandles.privateLookupIn(Demo.class, MethodHandles.lookup())
+                    .findVarHandle(Demo.class, "name", String.class);
+            countHandle.set(instance, "hello world");
+            // 替换指定位置，指定数值的值
+            arrayVarHandle.compareAndSet(instance.arrayData, 1, 5, 100);
+            arrayVarHandle.compareAndSet(instance.arrayData, 0, 3, 300);
+            System.out.println(instance);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void testProcessHandle() {
+        final ProcessHandle processHandle = ProcessHandle.current();
+        final ProcessHandle.Info info = processHandle.info();
+        System.out.println("Process info =>");
+        System.out.format("PID: %s%n", processHandle.pid());
+        info.arguments().ifPresent(args -> System.out.format("Arguments: %s%n", Arrays.toString(args)));
+        info.command().ifPresent(command -> System.out.format("Command: %s%n", command));
+        info.commandLine()
+                .ifPresent(commandLine -> System.out.format("Command line: %s%n", commandLine));
+        info.startInstant()
+                .ifPresent(startInstant -> System.out.format("Start time: %s%n", startInstant));
+        info.totalCpuDuration()
+                .ifPresent(cpuDuration -> System.out.format("CPU time: %s%n", cpuDuration));
+        info.user().ifPresent(user -> System.out.format("User: %s%n", user));
+    }
+
+    private static void useByteBuffer() {
+        ByteBuffer buffer = ByteBuffer.allocate(32);
+        buffer.put((byte) 1);
+        buffer.put(new byte[3]);
+        buffer.putChar('A');
+        buffer.putFloat(0.0f);
+        buffer.putLong(10, 100L);
+        System.out.println(buffer.getChar(4));
+        System.out.println(buffer.remaining());
+    }
+
+    private static void byteOrder() {
+        ByteBuffer buffer = ByteBuffer.allocate(4);
+        buffer.putInt(1);
+        buffer.order(ByteOrder.LITTLE_ENDIAN);
+        System.out.println(buffer.getInt(0));
+    }
+
+    private static void compact() {
+        ByteBuffer buffer = ByteBuffer.allocate(32);
+        buffer.put(new byte[16]);
+        buffer.flip();
+        buffer.getInt();
+        buffer.compact();
+        System.out.println(buffer.position());
+    }
+
+    private static void viewBuffer() {
+        ByteBuffer buffer = ByteBuffer.allocate(32);
+        buffer.putInt(1);
+        IntBuffer intBuffer = buffer.asIntBuffer();
+        intBuffer.put(2);
+        System.out.println(buffer.getInt());
     }
 
     public void uncaughtException(Thread t, Throwable e) {
@@ -282,6 +368,15 @@ public class DemoTest {
                         .forEach(f.getBars()::add))
                 .flatMap(f -> f.getBars().stream())
                 .forEach(b -> System.out.println(b.getName()));
+
+        int[] arr = {4, 12, 1, 3, 5, 7, 9};
+
+        long count = Arrays.stream(arr).filter(x -> x > 2).peek(System.out::println).count();
+        System.out.println(count);
+
+        final int num = 3;
+        Function<Integer, Integer> fun = (from) -> from * num;
+        System.out.println(fun.apply(5));
     }
 
     private static void operationTest() {
@@ -352,6 +447,11 @@ public class DemoTest {
                 .reduce((sum, cost) -> sum + cost)
                 .orElse(null);
         System.out.println("Total : " + bill);
+
+        List<Integer> arr = List.of(4, 12, 1, 3, 5, 7, 9);
+
+        arr.stream().reduce((x, y) -> x + y).ifPresent(System.out::println);
+        System.out.println(arr.stream().reduce(-10, (x, y) -> x + y));
     }
 
     private static void filter(List<String> names, Predicate<String> condition) {
@@ -408,6 +508,7 @@ public class DemoTest {
 //        IntStream.of(1, 2, 3).forEach(System.out::println);
 //        IntStream.range(1, 3).forEach(System.out::println);
 //        IntStream.rangeClosed(1, 3).forEach(System.out::println);
+
         Random seed = new Random();
         Supplier<Integer> random = () -> seed.nextInt(3) + 1;
         Stream.generate(random).limit(3).forEach(System.out::println);
@@ -417,11 +518,9 @@ public class DemoTest {
                 new Person("Peter", 23),
                 new Person("Pamela", 23),
                 new Person("David", 12));
-        List<Person> filtered =
-                persons
-                        .stream()
-                        .filter(p -> p.getName().startsWith("P"))
-                        .collect(Collectors.toList());
+        List<Person> filtered = persons.stream()
+                .filter(p -> p.getName().startsWith("P"))
+                .collect(Collectors.toList());
         System.out.println(filtered);    // [Peter, Pamela]
 
         Map<Integer, List<Person>> personsByAge = persons
@@ -448,6 +547,19 @@ public class DemoTest {
                 .stream()
                 .collect(personNameCollector);
         System.out.println(names);  // MAX | PETER | PAMELA | DAVID
+
+        int[] arr = {4, 12, 1, 3, 5, 7, 9};
+
+        List<Integer> list = Arrays.stream(arr).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        System.out.println(list);
+
+//        Set<Integer> set = list.stream().collect(Collectors.toSet());
+        Set<Integer> set = new HashSet<>(list);
+        System.out.println(set);
+
+        Map<String, Person> map = persons.stream()
+                .collect(Collectors.toMap(Person::getName, a -> a));
+        System.out.println(map);
     }
 
     private static void mapOprTest() {
@@ -475,13 +587,14 @@ public class DemoTest {
 //                    return s.toUpperCase();
 //                })
 //                .forEach(s -> System.out.println("forEach: " + s));
+
         Stream<String> stream = Stream.of("d2", "a2", "b1", "b3", "c")
                 .filter(s -> {
                     System.out.println("filter: " + s);
                     return s.startsWith("a");
                 });
         boolean a = stream.anyMatch(s -> true);    // ok
-//        a = stream.noneMatch(s -> true);   // exception
+//        a = stream.noneMatch(s -> true);   // exception 因为流已经关闭
 
         Supplier<Stream<String>> streamSupplier = () -> Stream.of("d2", "a2", "b1", "b3", "c")
                 .filter(s -> {
@@ -507,17 +620,20 @@ public class DemoTest {
 //        System.out.println(map.size());
 //        System.out.println("entrySet end : " + System.nanoTime());
 //        System.out.println("===========================");
+
 //        Set<String> strings = map.keySet();
 //        for (String string : strings) {
 //            Integer integer = map.get(string);
 ////            System.out.println("key = " + string + " value = " + integer);
 //        }
 //        System.out.println("===========================");
+
 //        System.out.println("forEach start : " + System.nanoTime());
 //        map.forEach((k, v) ->
 //                System.out.println("key = " + k + " value = " + v)
 //        );
 //        System.out.println("forEach end : " + System.nanoTime());
+
 //        map.computeIfPresent(3, (num, val) -> val + num);
 //        System.out.println(map.get(3));
 //
@@ -533,6 +649,7 @@ public class DemoTest {
 
         map.merge(9, "concat", String::concat);
         System.out.println(map.get(9));
+
         map.put(9, map.get(9).concat("new"));
         System.out.println(map.get(9));
     }
