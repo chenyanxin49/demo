@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.example.tree;
 
 import java.util.Arrays;
 
@@ -14,7 +14,7 @@ import java.util.Arrays;
  */
 public class HeapSortTest {
 
-    /*
+    /**
      * 建立堆时只需要保证根结点小于两个子结点或者大于两个子结点，对两个子结点大小没有要求
      */
     public static void main(String[] args) {
@@ -27,7 +27,7 @@ public class HeapSortTest {
         System.out.println(Arrays.toString(a));
     }
 
-    private static void heapSort(int[] a) {
+    static void heapSort(int[] a) {
         //建立大根堆
         buildMaxHeap(a);
         System.out.println(Arrays.toString(a));
@@ -38,7 +38,7 @@ public class HeapSortTest {
             a[i] = temp;
             maxHeap(a, i, 0);
             c++;
-            System.out.println("[heapSort " + c + " "+ i +"]" + Arrays.toString(a));
+            System.out.println("[heapSort " + c + " " + i + "]" + Arrays.toString(a));
         }
     }
 
@@ -48,7 +48,7 @@ public class HeapSortTest {
         for (int i = half; i >= 0; i--) {
             maxHeap(a, a.length, i);
             c++;
-            System.out.println("[maxHeap " + c + " "+ i +"]" + Arrays.toString(a));
+            System.out.println("[maxHeap " + c + " " + i + "]" + Arrays.toString(a));
         }
     }
 

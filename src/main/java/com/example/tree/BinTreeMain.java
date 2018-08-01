@@ -1,5 +1,6 @@
 package com.example.tree;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class BinTreeMain {
     public static void main(String[] args) {
-        int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
         List<TreeNode> nodeList = new LinkedList<>();
         TreeNode treeNode = new TreeNode();
         treeNode.createBinTree(array, nodeList);
@@ -38,7 +39,7 @@ public class BinTreeMain {
         System.out.println("非递归后序：");
         treeNode.postOrder2(root);
         System.out.println();
-        System.out.println("层级排序：");
+        System.out.println("层级遍历：");
         treeNode.levelOrder(root);
         System.out.println();
         System.out.println("树高：");
@@ -49,5 +50,7 @@ public class BinTreeMain {
         System.out.println();
         System.out.println("是否对称的二叉树：");
         System.out.println(treeNode.isSymmetrical(root));
+//        HeapSortTest.heapSort(array);
+        System.out.println(Arrays.toString(array));
     }
 }

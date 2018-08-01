@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.example.tests;
 
 import com.example.domain.Bar;
 import com.example.domain.Demo;
@@ -6,9 +6,7 @@ import com.example.domain.Foo;
 import com.example.domain.Person;
 import org.springframework.core.convert.converter.Converter;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
 import java.nio.ByteBuffer;
@@ -54,7 +52,6 @@ public class DemoTest {
 //        mapOprTest();
 //        operationTest();
 //        dateTest();
-//        dateTest();
 //        flatMapTest();
 //        threadTest();
 //        executorsTest();
@@ -71,10 +68,26 @@ public class DemoTest {
 //        compact();
 //        viewBuffer();
 //        testProcessHandle();
-        VariableHandlesTest();
+//        variableHandlesTest();
+//        exceptionTest();
+
     }
 
-    private static void VariableHandlesTest() {
+    private static void exceptionTest() {
+        // 异常捕获后就不会再往下传递
+        try {
+            BufferedReader bufferedWriter = new BufferedReader(new FileReader("a.txt"));
+            int read = bufferedWriter.read();
+        } catch (FileNotFoundException e) {
+            System.out.println("FileNotFoundException");
+        } catch (IOException e) {
+            System.out.println("IOException");
+        } catch (Exception e) {
+            System.out.println("Exception");
+        }
+    }
+
+    private static void variableHandlesTest() {
         try {
             Demo instance = new Demo();
             System.out.println(instance);
@@ -338,12 +351,23 @@ public class DemoTest {
             }
         };
 
+        // 单独调用run()的话，会在当前线程中执行run()，而并不会启动新线程！可以被重复调用。
         task.run();
 
         Thread thread = new Thread(task);
+        // 启动一个新线程，新线程会执行相应的run()方法。start()不能被重复调用。
         thread.start();
 
         System.out.println("Done!");
+
+        Thread t = new Thread(DemoTest::pong);
+//        t.run();
+        t.start();
+        System.out.println("ping");
+    }
+
+    private static void pong() {
+        System.out.println("pong" + Thread.currentThread().getName());
     }
 
     private static void flatMapTest() {
