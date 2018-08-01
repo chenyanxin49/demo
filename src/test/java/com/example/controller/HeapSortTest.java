@@ -18,7 +18,7 @@ public class HeapSortTest {
      * 建立堆时只需要保证根结点小于两个子结点或者大于两个子结点，对两个子结点大小没有要求
      */
     public static void main(String[] args) {
-        int[] a = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+        int[] a = {2, 6, 7, 9, 5, 8, 3, 4, 1, 0};
         //在堆排序之前，打印初始数组
         System.out.println(Arrays.toString(a));
         //进行堆排序
@@ -58,11 +58,22 @@ public class HeapSortTest {
         int right = (index << 1) + 2;
 
         int largest = index;
+
+        if (left < heapSize) {
+            System.out.println("[left : " + a[left] + "] index : " + index);
+        }
+
+        if (right < heapSize) {
+            System.out.println("[left : " + a[right] + "] index : " + a[largest]);
+        }
+
         if (left < heapSize && a[left] > a[index]) {
+            System.out.println("[left : " + a[left] + "] index : " + index);
             largest = left;
         }
 
         if (right < heapSize && a[right] > a[largest]) {
+            System.out.println("[left : " + a[right] + "] index : " + a[largest]);
             largest = right;
         }
 
