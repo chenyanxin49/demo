@@ -11,22 +11,59 @@ package com.example.domain;
  * Person
  */
 public class Person {
+
     private String name;
+    private String gender;
     private Integer age;
 
+    public interface Sex {
+        /**
+         * 男人
+         */
+        String MALE = "male";
+        /**
+         * 女人
+         */
+        String FEMALE = "female";
+    }
+
     public Person() {
+    }
+
+    public Person(Integer age, String gender) {
+        this.age = age;
+        this.gender = gender;
+    }
+
+    public Person(String name, String gender) {
+        this.name = name;
+        this.gender = gender;
+    }
+
+    public Person(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public Person(String name, String gender, Integer age) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
     }
 
     public Person(String name) {
         this.name = name;
     }
 
-    public Person(Integer age) {
-        this.age = age;
+    public String getGender() {
+        return gender;
     }
 
-    public Person(String name, Integer age) {
-        this.name = name;
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Person(Integer age) {
         this.age = age;
     }
 

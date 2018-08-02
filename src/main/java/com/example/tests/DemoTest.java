@@ -4,6 +4,8 @@ import com.example.domain.Bar;
 import com.example.domain.Demo;
 import com.example.domain.Foo;
 import com.example.domain.Person;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
 
 import java.io.*;
@@ -74,11 +76,13 @@ public class DemoTest {
     }
 
     private static void exceptionTest() {
+        Logger logger = LoggerFactory.getLogger(DemoTest.class);
         // 异常捕获后就不会再往下传递
         try {
             BufferedReader bufferedWriter = new BufferedReader(new FileReader("a.txt"));
             int read = bufferedWriter.read();
         } catch (FileNotFoundException e) {
+            logger.error("文件操作异常:{}", e.getMessage());
             System.out.println("FileNotFoundException");
         } catch (IOException e) {
             System.out.println("IOException");
