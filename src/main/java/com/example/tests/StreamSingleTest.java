@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -33,7 +34,105 @@ public class StreamSingleTest {
 //        forEachTest();
 //        reduceTest();
 //        limitSkipTest();
-        sortedTest();
+//        sortedTest();
+//        minMaxDistinctTest();
+//        matchTest();
+//        generateTest();
+//        iterateTest();
+        collectorsTest();
+
+    }
+
+    private static void collectorsTest() {
+        Map<Integer, List<Person>> personGroups = Stream.generate(new PersonSupplier())
+                .limit(20)
+                .collect(Collectors.groupingBy(Person::getAge));
+        personGroups.forEach((key, value) -> System.out.println("Age " + key + " = " + value.size()));
+
+        Map<Boolean, List<Person>> children = Stream.generate(new PersonSupplier()).
+                limit(20).
+                collect(Collectors.partitioningBy(p -> p.getAge() < 18));
+        System.out.println("Children number: " + children.get(true).size());
+        System.out.println("Adult number: " + children.get(false).size());
+    }
+
+    private static void iterateTest() {
+        // seed 第一个，f(seed) 为第二个，f(f(seed)) 第三个
+        // iterate 时候管道必须有 limit 这样的操作来限制 Stream 大小。
+        Stream.iterate(0, n -> n + 3)
+                .limit(10)
+                .forEach(x -> System.out.print(x + " "));
+    }
+
+    private static void generateTest() {
+        Random seed = new Random();
+        // 限定随机数区间用 seed.nextInt(10)为 0~9 nextInt(10)+1 为 1~10
+        Supplier<Integer> random = seed::nextInt;
+        Stream.generate(random)
+                .limit(10)
+                .forEach(System.out::println);
+
+        //Another way
+        IntStream.generate(() -> (int) (System.nanoTime() % 100)).
+                limit(10)
+                .forEach(System.out::println);
+
+        Stream.generate(new PersonSupplier())
+                .limit(10)
+                .forEach(p -> System.out.println(p.getName() + ", " + p.getAge()));
+    }
+
+    private static class PersonSupplier implements Supplier<Person> {
+        private int index = 0;
+        private Random random = new Random();
+
+        @Override
+        public Person get() {
+            return new Person("StormTestUser" + ++index, random.nextInt(36) + 1);
+        }
+    }
+
+    private static void matchTest() {
+        List<Person> persons = new ArrayList<>();
+        persons.add(new Person("name" + 1, 10));
+        persons.add(new Person("name" + 2, 21));
+        persons.add(new Person("name" + 3, 34));
+        persons.add(new Person("name" + 4, 6));
+        persons.add(new Person("name" + 5, 55));
+        boolean isAllAdult = persons.stream()
+                .allMatch(p -> p.getAge() > 18);
+        System.out.println("All are adult? " + isAllAdult);
+        boolean isThereAnyChild = persons.stream()
+                .anyMatch(p -> p.getAge() < 12);
+        System.out.println("Any child? " + isThereAnyChild);
+        boolean isThereNoneOld = persons.stream()
+                .noneMatch(p -> p.getAge() > 60);
+        System.out.println("None old man? " + isThereNoneOld);
+    }
+
+    private static void minMaxDistinctTest() {
+        try (BufferedReader br = new BufferedReader(new FileReader("e:\\123.txt"))) {
+            int longest = br.lines()
+                    .mapToInt(String::length)
+                    .max()
+                    .orElse(-1);
+            System.out.println(longest);
+
+            BufferedReader br1 = new BufferedReader(new FileReader("e:\\123.txt"));
+            List<String> words = br1.lines()
+                    .flatMap(line -> Stream.of(line.split(" ")))
+                    .filter(word -> word.length() > 0)
+                    .map(String::toLowerCase)
+                    .distinct()
+                    .sorted()
+                    .collect(Collectors.toList());
+            System.out.println(words);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     private static void sortedTest() {
@@ -156,9 +255,12 @@ public class StreamSingleTest {
                 .forEach(System.out::println);
     }
 
-    private static void tryWithResources() throws IOException {
+    private static void tryWithResources() {
+        // 可以自动关闭资源，但并不会捕捉异常，所以要带上catch
         try (BufferedReader br = new BufferedReader(new FileReader("E:\\123.txt"))) {
             br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
