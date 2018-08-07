@@ -46,7 +46,7 @@ class TreeNode {
             // 树节点放入树集合
             nodeList.add(new TreeNode(anArray));
         }
-        // 依次为节点添加孩子，循环上限需-1，否则可能数组下标越界
+        // 依次为节点添加孩子，循环上限需-1，最后位判断总个数是否为奇数，奇数需要单独处理
         for (int parentIndex = 0; parentIndex < (array.length >> 1) - 1; parentIndex++) {
             // 左孩子
             nodeList.get(parentIndex).left = nodeList.get((parentIndex << 1) + 1);
@@ -176,9 +176,9 @@ class TreeNode {
      * 根据先序序列和中序序列唯一建造一棵二叉树，返回二叉树的根
      */
     private TreeNode preAndinCreateTree(char[] pre, char[] in, int i, int j, int m, int n) {
-        //数组pre存储先序序列，i,j分别表示pre的上标和下标
-        //in：中序序列，m，n分别表示in的上标和下标
-        //函数返回先序序列和中序序列构成的树的根
+        // 数组pre存储先序序列，i,j分别表示pre的上标和下标
+        // in：中序序列，m，n分别表示in的上标和下标
+        // 函数返回先序序列和中序序列构成的树的根
         int k;
         TreeNode p = null;
         if (n < 0) {
@@ -186,7 +186,7 @@ class TreeNode {
         }
         p = new TreeNode(pre[i]);
         k = m;
-        //在中序中找根
+        // 在中序中找根
         while ((k <= n) && in[k] != pre[i]) {
             k++;
         }
@@ -199,13 +199,21 @@ class TreeNode {
      * 层次遍历
      */
     void levelOrder(TreeNode node) {
+        // 创建队列
         Queue<TreeNode> queue = new LinkedList<>();
+        // 如果节点不为空，加入队列
         if (node != null) {
             queue.add(node);
+            // 只要队列不为空
             while (!queue.isEmpty()) {
+                // 取出队列第一个
                 TreeNode nnode = queue.poll();
+                // 如果不为空
                 if (nnode != null) {
+                    // 操作数据
                     System.out.print(nnode.val + "\t");
+                    // 如果有左或右孩子，加入队列
+                    // 1（2（45）3（67））一层层放到队列中为 1234567
                     if (nnode.left != null) {
                         queue.add(nnode.left);
                     }
@@ -225,6 +233,10 @@ class TreeNode {
         if (node == null) {
             return 0;
         } else {
+            // 递归到左或右的最深处
+            // 1（2（45）3（67））4的左右为0返回1+0，5的左右为0返回1，2的左右4 5为1+0，返回1+1；
+            // 同样，3的左右6 7都返回1+0，3返回1+1；
+            // 1的左右2 3返回1+2；最终结果为3，树高3
             lh = height(node.left);
             rh = height(node.right);
             return 1 + (lh > rh ? lh : rh);
@@ -236,6 +248,7 @@ class TreeNode {
      */
     void mirror(TreeNode root) {
         if (root != null) {
+            // 先互换左右，再递归互换，一层层深入
             TreeNode temp = root.left;
             root.left = root.right;
             root.right = temp;
@@ -245,14 +258,13 @@ class TreeNode {
     }
 
     /**
-     * 二叉树的下一个结点 给定一个二叉树和其中的一个结点，请找出中序遍历顺序的下一个结点并且返回。
-     * 注意，树中的结点不仅包含左右子结点，同时包含指向父结点的指针。
      * 对称的二叉树
      */
     boolean isSymmetrical(TreeNode pRoot) {
         if (pRoot == null) {
             return true;
         }
+        // 递归调用，所有左右相等即是对称
         return lrSym(pRoot.left, pRoot.right);
     }
 
@@ -261,6 +273,7 @@ class TreeNode {
             return true;
         }
         if (left != null && right != null) {
+            // 递归调用，所有左右相等即是对称
             return left.val == right.val
                     && lrSym(left.left, right.right)
                     && lrSym(left.right, right.left);

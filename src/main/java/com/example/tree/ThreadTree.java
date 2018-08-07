@@ -9,6 +9,8 @@ package com.example.tree;
  * Version  :       1.0
  * Company  :       北京太比雅科技(武汉研发中心)
  * ThreadTree
+ *   给定一个二叉树和其中的一个结点，请找出中序遍历顺序的下一个结点并且返回。
+ * 树中的结点包含前后中序遍历顺序的上或下结点。
  */
 public class ThreadTree {
 
