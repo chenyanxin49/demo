@@ -3,6 +3,7 @@ package com.example.common;
 import com.example.domain.Player;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
+import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -19,18 +20,23 @@ public class CountDownLatchDemo {
 
     private static final int PLAYER_AMOUNT = 5;
 
-    public static void main(String[] args) {
+    /**
+     * 对于整个比赛，所有运动员结束后才算结束
+     */
+    private static final CountDownLatch END = new CountDownLatch(PLAYER_AMOUNT);
 
+    public static void main(String[] args) {
+        threadTeat();
+    }
+
+    private static void threadTeat() {
         // 对于每位运动员，CountDownLatch减1后即结束比赛
         CountDownLatch begin = new CountDownLatch(1);
-
-        // 对于整个比赛，所有运动员结束后才算结束
-        CountDownLatch end = new CountDownLatch(PLAYER_AMOUNT);
 
         Player[] plays = new Player[PLAYER_AMOUNT];
 
         for (int i = 0; i < PLAYER_AMOUNT; i++) {
-            plays[i] = new Player(i + 1, begin, end);
+            plays[i] = new Player(i + 1, begin, END);
         }
 
         // 定义一个有意义的线程名
@@ -103,7 +109,9 @@ public class CountDownLatchDemo {
         begin.countDown();
         try {
             // 等待end状态变为0，即为比赛结束
-            end.wait();
+            synchronized (END) {
+                END.wait();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {

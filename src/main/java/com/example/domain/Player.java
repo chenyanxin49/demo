@@ -1,5 +1,6 @@
 package com.example.domain;
 
+import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -30,8 +31,10 @@ public class Player implements Runnable {
             // 等待begin的状态为0
             begin.await();
             // 随机分配时间，即运动员完成时间
-            Thread.sleep((long) (Math.random() * 100));
-            System.out.println("Play" + id + " arrived.");
+            Random r = new Random();
+            int i = r.nextInt(5);
+            Thread.sleep(i);
+            System.out.println("Play" + id + " arrived. use " + i);
             System.out.println(Thread.currentThread().getName());
         } catch (InterruptedException e) {
             e.printStackTrace();
