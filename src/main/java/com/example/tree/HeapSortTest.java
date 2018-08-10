@@ -27,7 +27,7 @@ public class HeapSortTest {
         System.out.println(Arrays.toString(a));
     }
 
-    static void heapSort(int[] a) {
+    private static void heapSort(int[] a) {
         //建立大根堆
         buildMaxHeap(a);
         System.out.println(Arrays.toString(a));
