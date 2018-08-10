@@ -1,9 +1,7 @@
 package com.example.tests;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import org.springframework.stereotype.Component;
 
-import java.util.Random;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.IntStream;
