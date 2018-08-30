@@ -1,6 +1,6 @@
 package com.example.mongodb.dao;
 
-import com.example.demo.mongodb.model.Page;
+import com.example.mongodb.model.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;

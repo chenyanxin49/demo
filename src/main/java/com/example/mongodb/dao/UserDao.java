@@ -1,6 +1,6 @@
 package com.example.mongodb.dao;
 
-import com.example.demo.mongodb.model.UserEntity;
+import com.example.mongodb.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
