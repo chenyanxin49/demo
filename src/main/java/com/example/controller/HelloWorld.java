@@ -25,8 +25,7 @@ public class HelloWorld {
     @RequestMapping("/hello")
     public String home() {
         Class<? extends IPoiDemoService> aClass = poiDemoService.getClass();
-        return "hello world = " + aClass;
+        return String.format(" hello world = %s", aClass);
     }
-
 
 }
