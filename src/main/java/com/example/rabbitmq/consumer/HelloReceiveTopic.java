@@ -4,7 +4,7 @@ import com.example.rabbitmq.constant.MyConstant;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class HelloReceiveTopic {
 
     @RabbitListener(queues= MyConstant.Rabbitmq.PROVIDER_QUEQUS_ONE)    //监听器监听指定的Queue

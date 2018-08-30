@@ -22,12 +22,12 @@ public class RabbitConfig {
     @Bean
     public Queue queue1() {
         // true表示持久化该队列
-        return new Queue("hello.queue1", true);
+        return new Queue("queue1", true);
     }
 
     @Bean
     public Queue queue2() {
-        return new Queue("hello.queue2", true);
+        return new Queue("queue2", true);
     }
 
     /**

@@ -1,6 +1,6 @@
 package com.example.mongodb.log;
 
-import com.example.demo.mongodb.model.SystemLog;
+import com.example.mongodb.model.SystemLog;
 import org.springframework.data.domain.Page;
 
 public interface SystemLogService {

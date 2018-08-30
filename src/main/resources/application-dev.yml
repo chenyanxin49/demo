@@ -29,6 +29,12 @@ spring:
   #      min-idle: 10
   #      max-active: 100
   #      max-wait: -1
+  data:
+    mongodb:
+      uri: mongodb://mongo.realtour.com.cn:27017/Realtourr8qjb2b
+      database: Realtourr8qjb2b
+      authenticationDatabase: Realtourr8qjb2b
+
   rabbitmq:
     host: 39.106.6.230
     port: 5672
@@ -38,6 +44,11 @@ spring:
     publisher-returns: true
     template:
       mandatory: true
+    listener:
+      simple:
+        concurrency: 2
+        max-concurrency: 2
+
 
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml

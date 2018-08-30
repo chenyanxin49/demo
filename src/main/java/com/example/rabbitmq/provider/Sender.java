@@ -4,6 +4,7 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.UUID;
@@ -14,6 +15,7 @@ import java.util.UUID;
  * @author: chenYanXin
  * @create: 2018/8/30 17:52
  */
+@Component
 public class Sender implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnCallback {
 
     @Autowired
@@ -36,7 +38,7 @@ public class Sender implements RabbitTemplate.ConfirmCallback, RabbitTemplate.Re
 
     @Override
     public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
-        System.out.println(message.getMessageProperties().getCorrelationIdString() + " 发送失败");
+        System.out.println(message.getMessageProperties().getCorrelationId() + " 发送失败");
     }
 
     /**

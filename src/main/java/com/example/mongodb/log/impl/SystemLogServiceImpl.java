@@ -1,8 +1,8 @@
 package com.example.mongodb.log.impl;
 
-import com.example.demo.mongodb.dao.SystemLogRepository;
-import com.example.demo.mongodb.log.SystemLogService;
-import com.example.demo.mongodb.model.SystemLog;
+import com.example.mongodb.dao.SystemLogRepository;
+import com.example.mongodb.log.SystemLogService;
+import com.example.mongodb.model.SystemLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.mongodb.core.MongoTemplate;
