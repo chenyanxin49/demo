@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 //@RabbitListener(queues = {"queue1","queue2"})
 public class MqConsumer {
 
+    int a = 0;
     @RabbitHandler
     public void process(String msg) {
         System.out.println("Listener: " + msg);
@@ -27,11 +28,17 @@ public class MqConsumer {
     @RabbitListener(queues = "queue1")
     public String processMessage1(String msg) {
         System.out.println(Thread.currentThread().getName() + " 接收到来自queue1队列的消息：" + msg);
+//        a++;
+//        System.out.println("次数" + a);
+//        int a = 1/0;
         return "processMessage1";
     }
 
     @RabbitListener(queues = "queue2")
     public void processMessage2(String msg) {
         System.out.println(Thread.currentThread().getName() + " 接收到来自queue2队列的消息：" + msg);
+        a++;
+        System.out.println("次数" + a);
+        int a = 1/0;
     }
 }

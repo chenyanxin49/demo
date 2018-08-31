@@ -8,7 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
 import java.nio.ByteBuffer;
@@ -20,6 +22,7 @@ import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 import java.util.concurrent.*;
@@ -44,6 +47,7 @@ import java.util.stream.Stream;
 public class DemoTest {
 
     public static void main(String[] args) {
+        Logger logger = LoggerFactory.getLogger(DemoTest.class);
 //        equalsTest();
 //        iteratorTest();
 //        listSortTest();
@@ -71,24 +75,26 @@ public class DemoTest {
 //        viewBuffer();
 //        testProcessHandle();
 //        variableHandlesTest();
-//        exceptionTest();
-
-    }
-
-    private static void exceptionTest() {
-        Logger logger = LoggerFactory.getLogger(DemoTest.class);
-        // 异常捕获后就不会再往下传递
         try {
-            BufferedReader bufferedWriter = new BufferedReader(new FileReader("a.txt"));
-            int read = bufferedWriter.read();
-        } catch (FileNotFoundException e) {
-            logger.error("文件操作异常:{}", e.getMessage());
-            System.out.println("FileNotFoundException");
-        } catch (IOException e) {
-            System.out.println("IOException");
+            exceptionTest();
         } catch (Exception e) {
+            logger.error("getMessage:{}", e.getMessage());
+            logger.error("getCause:{}", e.getCause());
+            logger.error("getLocalizedMessage:{}", e.getLocalizedMessage());
+            logger.error("getClass:{}", e.getClass().toString());
+            logger.error("getClass:{}", e.getClass().getName());
+            e.printStackTrace();
             System.out.println("Exception");
         }
+    }
+
+    private static void exceptionTest() throws Exception {
+
+        // 异常捕获后就不会再往下传递
+
+        BufferedReader bufferedWriter = new BufferedReader(new FileReader("a.txt"));
+        int read = bufferedWriter.read();
+
     }
 
     private static void variableHandlesTest() {
@@ -437,7 +443,7 @@ public class DemoTest {
         LocalDate localDate = LocalDate.now();
 //        LocalDateTime ld = LocalDateTime.now();
 //        Instant i = Instant.now();
-        System.out.println(localDate.toString().substring(0, 7));
+        System.out.println(String.format("%s %s", localDate.toString(), LocalTime.now().toString().substring(0, 8)));
 //        System.out.println(df.format(localDate));
         LocalDate firstDayOfThisMonth = localDate.with(TemporalAdjusters.firstDayOfMonth());
         System.out.println(firstDayOfThisMonth);
