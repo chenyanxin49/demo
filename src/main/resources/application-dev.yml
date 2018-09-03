@@ -43,11 +43,22 @@ spring:
     publisher-confirms: true
     publisher-returns: true
     template:
+#      mandatory标志告诉broker代理服务器至少将消息route到一个队列中，否则就将消息return给发送者
       mandatory: true
     listener:
       simple:
+#        同时启动两个监听线程
         concurrency: 2
+#        最大允许两个监听线程
         max-concurrency: 2
+        retry:
+          enabled: true
+#          重试次数
+          max-attempts: 2
+#          每次间隔毫秒
+          initial-interval: 10000
+#          是否默认将消费失败的消息重新加入队列
+        default-requeue-rejected: false
 
 
 mybatis:

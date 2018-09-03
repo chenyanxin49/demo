@@ -28,8 +28,8 @@ public class DemoApplicationTests {
     @Test
     public void mqTest() throws InterruptedException {
 //        for (int i = 0; i < 3; i++) {
-            String msg = LocalDateTime.now().toString();
-            sender.send(msg);
+//            String msg = LocalDateTime.now().toString();
+//            sender.send(msg);
 //            Thread.sleep(1000);
 //        }
     }
