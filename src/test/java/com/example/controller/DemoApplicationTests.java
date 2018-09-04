@@ -32,11 +32,11 @@ public class DemoApplicationTests {
 
     @Test
     public void mqTest() throws InterruptedException {
-        for (int i = 0; i < 3; i++) {
-            String msg = LocalDateTime.now().toString();
+//        for (int i = 0; i < 3; i++) {
+            String msg = "{\"mqMsgId\":\"eff0f2aa-9218-40bf-a536-496080cbf563\",\"objectType\":\"OrderDetail\",\"objectKeyId\":\"95fd4980-31b9-42db-a56d-a01771c3a668\",\"extendData\":null,\"createTime\":\"2018-09-04 10:43:23.650\"}";
             sender.send(msg);
-            Thread.sleep(1000);
-        }
+//            Thread.sleep(1000);
+//        }
     }
 
     @Test

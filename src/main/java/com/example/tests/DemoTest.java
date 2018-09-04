@@ -76,7 +76,10 @@ public class DemoTest {
 //        viewBuffer();
 //        testProcessHandle();
 //        variableHandlesTest();
-        System.out.println(JSONObject.parseObject(encryptTest()));
+//        System.out.println(JSONObject.parseObject(encryptTest()));
+    }
+    private static Integer intTest(){
+        return 206;
     }
 
     private static String encryptTest() {

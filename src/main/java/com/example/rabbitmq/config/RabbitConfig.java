@@ -37,16 +37,16 @@ public class RabbitConfig {
         return new Queue("queue2", true);
     }
 
-    @Bean
-    public Queue queue3() {
-        Map<String,Object> args=new HashMap<>();
-        // 设置该Queue的死信的信箱
-        args.put("x-dead-letter-exchange", "deadLetterExchange");
-        // 设置死信routingKey
-        args.put("x-dead-letter-routing-key", "DEAD_ROUTING_KEY");
-        // 重试次数到了之后根据上面的地址发送到死信队列
-        return new Queue("queue3",true,false,false,args);
-    }
+//    @Bean
+//    public Queue queue3() {
+//        Map<String,Object> args=new HashMap<>();
+//        // 设置该Queue的死信的信箱
+//        args.put("x-dead-letter-exchange", "deadLetterExchange");
+//        // 设置死信routingKey
+//        args.put("x-dead-letter-routing-key", "DEAD_ROUTING_KEY");
+//        // 重试次数到了之后根据上面的地址发送到死信队列
+//        return new Queue("queue3",true,false,false,args);
+//    }
 
     /**
      * 声明交互器
@@ -68,10 +68,10 @@ public class RabbitConfig {
     public Binding binding2() {
         return BindingBuilder.bind(queue2()).to(topicExchange()).with("key.#");
     }
-
-    @Bean
-    public Binding binding3() {
-        return BindingBuilder.bind(queue3()).to(topicExchange()).with("key.#");
-    }
+//
+//    @Bean
+//    public Binding binding3() {
+//        return BindingBuilder.bind(queue3()).to(topicExchange()).with("key.#");
+//    }
 
 }

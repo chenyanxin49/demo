@@ -39,7 +39,7 @@ spring:
     host: 39.106.6.230
     port: 5672
     username: realtour
-    password: realtour
+    password: RabbitMQ#Realtour
     publisher-confirms: true
     publisher-returns: true
     template:

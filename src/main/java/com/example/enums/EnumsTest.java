@@ -31,17 +31,28 @@ public class EnumsTest {
 
         // 3.演示EnmuSet的使用
 
-        System.out.println("演示EnmuSet对象的使用和遍历.....");
+//        System.out.println("演示EnmuSet对象的使用和遍历.....");
 
-        testEnumSet();
+//        testEnumSet();
+        System.out.println(Color.RED);
+        System.out.println(Color.RED.getAddress());
+        System.out.println(Color.getAddress("red"));
+        enumTest(Light.RED);
+        enumTest(Light.GREEN);
+    }
 
+    private static void enumTest(Light l) {
+        switch (l) {
+            case RED:
+            case GREEN:
+            case YELLOW:
+            default:
+        }
     }
 
     /**
-     *
      * 演示枚举类型的遍历
      */
-
     private static void testTraversalEnum() {
 
         Light[] allLight = Light.values();
@@ -59,10 +70,8 @@ public class EnumsTest {
     }
 
     /**
-     *
      * 演示EnumMap的使用，EnumMap跟HashMap的使用差不多，只不过key要是枚举类型
      */
-
     private static void testEnumMap() {
 
         // 1.演示定义EnumMap对象，EnumMap对象的构造函数需要参数传入,默认是key的类的类型
@@ -90,12 +99,10 @@ public class EnumsTest {
     }
 
     /**
-     *
      * 演示EnumSet如何使用，EnumSet是一个抽象类，获取一个类型的枚举类型内容<BR/>
-     *
+     * <p>
      * 可以使用allOf方法
      */
-
     private static void testEnumSet() {
 
         EnumSet<Light> currEnumSet = EnumSet.allOf(Light.class);

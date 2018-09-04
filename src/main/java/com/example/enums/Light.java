@@ -21,9 +21,9 @@ public enum Light {
 
     // 构造函数，枚举类型只能为私有
 
-    private Light(int _nCode) {
+    private Light(int nCode) {
 
-        this.nCode = _nCode;
+        this.nCode = nCode;
 
     }
 
