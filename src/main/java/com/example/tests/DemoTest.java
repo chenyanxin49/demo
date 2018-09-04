@@ -1,9 +1,9 @@
 package com.example.tests;
 
-import com.example.domain.Bar;
-import com.example.domain.Demo;
-import com.example.domain.Foo;
-import com.example.domain.Person;
+import com.alibaba.fastjson.JSONObject;
+import com.example.common.EncryptUtil;
+import com.example.common.HttpUtil;
+import com.example.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
@@ -46,8 +46,9 @@ import java.util.stream.Stream;
  */
 public class DemoTest {
 
+    private static Logger logger = LoggerFactory.getLogger(DemoTest.class);
+
     public static void main(String[] args) {
-        Logger logger = LoggerFactory.getLogger(DemoTest.class);
 //        equalsTest();
 //        iteratorTest();
 //        listSortTest();
@@ -75,6 +76,33 @@ public class DemoTest {
 //        viewBuffer();
 //        testProcessHandle();
 //        variableHandlesTest();
+        System.out.println(JSONObject.parseObject(encryptTest()));
+    }
+
+    private static String encryptTest() {
+        MassageData jsonParams = new MassageData();
+        Map<String, String> head = new HashMap<>();
+        Map<String, String> body = new HashMap<>();
+        head.put("PartnerId", "f60ce42a-636d-c002-8721-f5ba6c15cbc2");
+        head.put("Function", "GetSysDestinationDetail");
+        head.put("TokenId ", "");
+        body.put("DestinationId", "000D6FD7-3971-457A-AF0A-3C4397F2B7BE");
+        String time = String.valueOf(System.currentTimeMillis()).substring(0,10);
+        head.put("Time", time);
+        String apiMd5 = EncryptUtil.getAPIMd5(JSONObject.toJSONString(body).concat(time), "QKCEHS5./37jghI@GSCG");
+        head.put("Sign", apiMd5);
+        jsonParams.setHead(head);
+        jsonParams.setBody(JSONObject.toJSONString(body));
+        String s = JSONObject.toJSONString(jsonParams);
+        return HttpUtil.doPostForJson("http://r8.realtour-develop.cn/Api/ApiForB2B/ApiForB2B.ashx", s);
+    }
+
+    private static void exceptionTest() throws Exception {
+
+        // 异常捕获后就不会再往下传递
+
+        BufferedReader bufferedWriter = new BufferedReader(new FileReader("a.txt"));
+        int read = bufferedWriter.read();
         try {
             exceptionTest();
         } catch (Exception e) {
@@ -86,15 +114,6 @@ public class DemoTest {
             e.printStackTrace();
             System.out.println("Exception");
         }
-    }
-
-    private static void exceptionTest() throws Exception {
-
-        // 异常捕获后就不会再往下传递
-
-        BufferedReader bufferedWriter = new BufferedReader(new FileReader("a.txt"));
-        int read = bufferedWriter.read();
-
     }
 
     private static void variableHandlesTest() {
