@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
@@ -77,9 +79,43 @@ public class DemoTest {
 //        testProcessHandle();
 //        variableHandlesTest();
 //        System.out.println(JSONObject.parseObject(encryptTest()));
+//        jsonTest();
+        Bar bar = tTest(Bar.class);
+        assert bar != null;
+        System.out.println(bar.getName());
+        Foo foo = tTest(Foo.class);
+        assert foo != null;
+        System.out.println(foo.getName());
     }
-    private static Integer intTest(){
-        return 206;
+
+    private static <T> T tTest(Class<T> clazz) {
+        try {
+            Constructor<T> constructor = clazz.getConstructor(String.class);
+            T t = constructor.newInstance("lisi");
+            Method[] bar = clazz.getMethods();
+            for (Method method : bar) {
+                System.out.println(method.getName());
+                if ("getName".equals(method.getName())) {
+                    System.out.println(method.invoke(t));
+                }
+                if ("setName".equals(method.getName())) {
+                    method.invoke(t,"lisi");
+                }
+            }
+            Method setName = clazz.getMethod("setName",String.class);
+            setName.invoke(t,"ls");
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static void jsonTest(){
+        String s = JSONObject.toJSONString(new Person("1905","154", 19000));
+        System.out.println(s);
+        Child child = JSONObject.parseObject(s, Child.class);
+        System.out.println(child);
     }
 
     private static String encryptTest() {

@@ -14,6 +14,9 @@ public class Bar {
 
     private String name;
 
+    public Bar() {
+    }
+
     public Bar(String name) {
         this.name = name;
     }
