@@ -2,8 +2,6 @@ package com.example.domain;
 
 import lombok.Data;
 
-import java.util.Map;
-
 /**
  * @program: realtour-r8-qj-b2b
  * @description:
@@ -11,9 +9,9 @@ import java.util.Map;
  * @create: 2018/9/3 11:21
  */
 @Data
-public class MassageData {
+public class RequestApiData {
 
-    private Map<String, String> head;
-    private Object body;
+    private Head head;
+    private String body;
 
 }

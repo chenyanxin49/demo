@@ -1,5 +1,8 @@
 package com.example.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import lombok.Data;
+
 /**
  * Created by       Intellij IDEA
  *
@@ -10,32 +13,11 @@ package com.example.domain;
  * Company  :       北京太比雅科技(武汉研发中心)
  * Person
  */
+@Data
 public class Child {
 
-    private String name;
+    @JSONField(name = "name")
+    private String nameId;
     private Integer age;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return "Child{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                '}';
-    }
 }

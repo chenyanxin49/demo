@@ -3,7 +3,9 @@ package com.example.tests;
 import com.alibaba.fastjson.JSONObject;
 import com.example.common.EncryptUtil;
 import com.example.common.HttpUtil;
+import com.example.common.JsonUtil;
 import com.example.domain.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
@@ -79,13 +81,13 @@ public class DemoTest {
 //        testProcessHandle();
 //        variableHandlesTest();
 //        System.out.println(JSONObject.parseObject(encryptTest()));
-//        jsonTest();
-        Bar bar = tTest(Bar.class);
-        assert bar != null;
-        System.out.println(bar.getName());
-        Foo foo = tTest(Foo.class);
-        assert foo != null;
-        System.out.println(foo.getName());
+        jsonTest();
+//        Bar bar = tTest(Bar.class);
+//        assert bar != null;
+//        System.out.println(bar.getName());
+//        Foo foo = tTest(Foo.class);
+//        assert foo != null;
+//        System.out.println(foo.getName());
     }
 
     private static <T> T tTest(Class<T> clazz) {
@@ -99,11 +101,11 @@ public class DemoTest {
                     System.out.println(method.invoke(t));
                 }
                 if ("setName".equals(method.getName())) {
-                    method.invoke(t,"lisi");
+                    method.invoke(t, "lisi");
                 }
             }
-            Method setName = clazz.getMethod("setName",String.class);
-            setName.invoke(t,"ls");
+            Method setName = clazz.getMethod("setName", String.class);
+            setName.invoke(t, "ls");
             return t;
         } catch (Exception e) {
             e.printStackTrace();
@@ -111,25 +113,27 @@ public class DemoTest {
         }
     }
 
-    private static void jsonTest(){
-        String s = JSONObject.toJSONString(new Person("1905","154", 19000));
+    private static void jsonTest() {
+        String s = JSONObject.toJSONString(new Person("1905", "154", 19000));
         System.out.println(s);
         Child child = JSONObject.parseObject(s, Child.class);
         System.out.println(child);
+        System.out.println(JsonUtil.toJsonString(child));
+
     }
 
     private static String encryptTest() {
-        MassageData jsonParams = new MassageData();
-        Map<String, String> head = new HashMap<>();
+        RequestApiData jsonParams = new RequestApiData();
+        Head head = new Head();
         Map<String, String> body = new HashMap<>();
-        head.put("PartnerId", "f60ce42a-636d-c002-8721-f5ba6c15cbc2");
-        head.put("Function", "GetSysDestinationDetail");
-        head.put("TokenId ", "");
+        head.setPartnerId("f60ce42a-636d-c002-8721-f5ba6c15cbc2");
+        head.setFunction("GetSysDestinationDetail");
+        head.setTokenId("");
         body.put("DestinationId", "000D6FD7-3971-457A-AF0A-3C4397F2B7BE");
-        String time = String.valueOf(System.currentTimeMillis()).substring(0,10);
-        head.put("Time", time);
+        String time = String.valueOf(System.currentTimeMillis()).substring(0, 10);
+        head.setTime(time);
         String apiMd5 = EncryptUtil.getAPIMd5(JSONObject.toJSONString(body).concat(time), "QKCEHS5./37jghI@GSCG");
-        head.put("Sign", apiMd5);
+        head.setSign(apiMd5);
         jsonParams.setHead(head);
         jsonParams.setBody(JSONObject.toJSONString(body));
         String s = JSONObject.toJSONString(jsonParams);
