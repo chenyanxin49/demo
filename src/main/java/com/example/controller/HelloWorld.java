@@ -1,10 +1,7 @@
 package com.example.controller;
 
-import com.example.serivce.IPoiDemoService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.example.domain.Child;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by      Intellij IDEA
@@ -15,17 +12,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Version :       1.0
  * Company :       北京太比雅科技(武汉研发中心)
  */
-@Controller
+@RestController
+@RequestMapping("/hello")
 public class HelloWorld {
 
-    @Autowired
-    private IPoiDemoService poiDemoService;
-
-    @ResponseBody
-    @RequestMapping("/hello")
-    public String home() {
-        Class<? extends IPoiDemoService> aClass = poiDemoService.getClass();
-        return String.format(" hello world = %s", aClass);
+    @GetMapping("/{v}")
+    public String getT(@PathVariable Child v) {
+        return String.format(" hello world = %s", v);
     }
-
+    @PostMapping("/child")
+    public String postT(@RequestBody Child v) {
+        return String.format(" hello world = %s", v);
+    }
 }

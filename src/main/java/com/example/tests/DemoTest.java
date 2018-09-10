@@ -5,7 +5,7 @@ import com.example.common.EncryptUtil;
 import com.example.common.HttpUtil;
 import com.example.common.JsonUtil;
 import com.example.domain.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
@@ -119,7 +119,10 @@ public class DemoTest {
         Child child = JSONObject.parseObject(s, Child.class);
         System.out.println(child);
         System.out.println(JsonUtil.toJsonString(child));
-
+        String strno = ",1,1,2 , ,,,3, ";
+        for (String string : StringUtils.split(strno, ",")) {
+            System.out.println(string);
+        }
     }
 
     private static String encryptTest() {
