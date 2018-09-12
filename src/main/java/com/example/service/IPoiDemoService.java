@@ -1,4 +1,4 @@
-package com.example.serivce;
+package com.example.service;
 
 import com.example.domain.FXbhB;
 

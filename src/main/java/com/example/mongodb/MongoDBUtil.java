@@ -197,7 +197,7 @@ public class MongoDBUtil {
         credentials.add(credential);
 
         //通过连接认证获取MongoDB连接
-        return new MongoClient(addrs, credentials);
+        return null;
     }
 
 

@@ -1,10 +1,11 @@
 package com.example.controller;
 
-import com.example.serivce.IPoiDemoService;
+import com.example.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by      Intellij IDEA
@@ -13,19 +14,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Date    :       2018-03-21
  * Time    :       14:00
  * Version :       1.0
- * Company :       北京太比雅科技(武汉研发中心)
+ * Company :
  */
-@Controller
+@RestController
 public class HelloWorld {
 
-    @Autowired
-    private IPoiDemoService poiDemoService;
+    private final TestService testService;
 
-    @ResponseBody
+    @Autowired
+    public HelloWorld(TestService testService) {
+        this.testService = testService;
+    }
+
     @RequestMapping("/hello")
     public String home() {
-        Class<? extends IPoiDemoService> aClass = poiDemoService.getClass();
-        return String.format(" hello world = %s", aClass);
+        System.out.println(123);
+        return "hello world";
+    }
+
+    @RequestMapping("/errorTest")
+    public String error() {
+        testService.test();
+        return "hello world";
     }
 
 }

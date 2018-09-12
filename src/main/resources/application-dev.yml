@@ -35,7 +35,7 @@ spring:
       database: Realtourr8qjb2b
       authenticationDatabase: Realtourr8qjb2b
 
-  rabbitmq:
+#  rabbitmq:
     host: 39.106.6.230
     port: 5672
     username: realtour
@@ -59,6 +59,8 @@ spring:
           initial-interval: 10000
 #          是否默认将消费失败的消息重新加入正常队列
         default-requeue-rejected: false
+#        自动ACK
+        acknowledge-mode: auto
 
 
 mybatis:
