@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * Date    :       2018-03-21
  * Time    :       14:00
  * Version :       1.0
- * Company :       北京太比雅科技(武汉研发中心)
+ * Company :
  */
 @RestController
 @RequestMapping("/hello")
@@ -29,6 +29,7 @@ public class HelloWorld {
     public String getT(@PathVariable Child v) {
         return String.format(" hello world = %s", v);
     }
+
     @PostMapping("/child")
     public String postT(@RequestBody Child v) {
         return String.format(" hello world = %s", v);
