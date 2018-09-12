@@ -17,9 +17,6 @@ import java.time.LocalDateTime;
 public class DemoApplicationTests {
 
     @Autowired
-    private HelloWorld h;
-
-    @Autowired
     private PoiDemo poi;
 
     @Autowired
@@ -41,7 +38,6 @@ public class DemoApplicationTests {
 
     @Test
     public void contextLoads() {
-        System.out.println(h.home());
         File srcF = new File("E:\\武汉研发中心工作\\河长制资料\\宿州水文局数据库淮北数据梳理.xlsx");
         String fileName = "横沙乡2017小班信息1.xlsx";
         try {
