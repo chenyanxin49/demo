@@ -25,9 +25,14 @@ public class HelloWorld {
         this.testService = testService;
     }
 
-    @GetMapping("/{v}")
-    public String getT(@PathVariable Child v) {
-        return String.format(" hello world = %s", v);
+    @GetMapping()
+    public String listAll() {
+        return String.format(" hello world = %s", "listAll");
+    }
+
+    @GetMapping("/{id}")
+    public String getT(@PathVariable String id) {
+        return String.format(" hello world = %s", id);
     }
 
     @PostMapping("/child")
