@@ -11,12 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by      Intellij IDEA
- *
  * @author :       ChenYanxin
  * Date    :       2018/9/2
- * Time    :       19:53
- * Version :       1.0
  * Company :       realtour
  * DeadLeater
  */

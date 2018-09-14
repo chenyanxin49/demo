@@ -27,7 +27,7 @@ public class ThreadPools {
         int processors = runtime.availableProcessors();
 
         // 手动设置特定的线程池
-        exec = new ThreadPoolExecutor(processors - 1, processors * 2,
+        exec = new ThreadPoolExecutor(processors - 1, processors -1,
                 0L, TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<>(1024),
                 namedThreadFactory,

@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -40,7 +39,11 @@ public class StreamSingleTest {
 //        generateTest();
 //        iterateTest();
 //        collectorsTest();
-
+        String a = null;
+        String[] split = a.split("d,");
+        for (String s : split) {
+            System.out.println(s);
+        }
     }
 
     private static void collectorsTest() {
