@@ -3,14 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="/js/jquery-1.7.1.js"></script>
+    <script src="/js/Common.js"></script>
 </head>
 <body>
 <form class="form-horizontal" id="form_table" action=""
       enctype="multipart/form-data" method="post">
     <input class="form-input" type="file" name="filename"/>
     <br/>
-    <button type="button" class="btn">开始导入</button>
+    <span id="s">123</span>
+    <button type="button" onclick="test()" class="btn">开始导入</button>
 </form>
+<script>
+    var orderId = null;
+    $(function () {
+        $.rtAjax({
+            url: "/hello/postT",
+            // dataType: "json",
+            data: {"v": orderId},
+            success: function (data) {
+                $('#s').html(456);
+            },
+            error: function (xhr) {
+                console.log(xhr.responseText)
+                $('#s').text(xhr.responseText);
+            }
+        });
+    })
 
+    function test() {
+
+
+        // $.ajax({
+        //     url: "http://localhost:8080/hello/postT",
+        //     // dataType: "json",
+        //     xhrFields: {
+        //         withCredentials: true
+        //     },
+        //     async: true,
+        //     cache: false,
+        //     type: "post",
+        //     data: {
+        //         v: orderId
+        //     },
+        //     beforeSend: null,
+        //     complete: null,
+        //     processData: true,
+        //     contentType: "application/x-www-form-urlencoded",
+        //     success: function (result) {
+        //         alert(result);
+        //     },
+        //     error: function (xhr) {
+        //         alert('错误\n' + xhr.response)
+        //     }
+        // });
+    }
+</script>
 </body>
 </html>

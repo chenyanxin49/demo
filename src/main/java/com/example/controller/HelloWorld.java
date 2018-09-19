@@ -40,6 +40,11 @@ public class HelloWorld {
         return String.format(" hello world = %s", v);
     }
 
+    @RequestMapping("/postT")
+    public String testT(String v) {
+        return String.format(" hello world = %s", v);
+    }
+
     @GetMapping("/errorTest")
     public String error() {
         testService.test();
