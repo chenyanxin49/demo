@@ -129,18 +129,15 @@
                     });
                     return;
                 }
+                var test = null;
+                var data = {"test":test};
                 $.ajax({
-                    url: 'login',
+                    url: '/hello/test',
                     type: 'post',
-                    data: this.messageData.toJSON,
-                    dataType: 'json',
+                    data: $.extend({},data),
+                    dataType: 'text',
                     success: function (data) {
-                        var result = data.result;
-                        if (result === 'true' || result === true) {
-                            alert("登录成功");
-                        } else {
-                            alert("登录失败");
-                        }
+                        alert(data)
                     },
                     error: function (data) {
                         alert(data);

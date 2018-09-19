@@ -1,5 +1,8 @@
 package com.example.threadpool;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+
 /**
  * @author chenYanXin
  * @date 2018/9/14 17:27
@@ -8,15 +11,27 @@ package com.example.threadpool;
 public class Demo1 {
 
     public static void main(String[] args) {
-        /*
-         * 实验策略是创建两个线程都进行保存student，然后都休息一段时间（给个3秒）
-         * A线程休息完后修改student中的年龄为11
-         * B线程在休息完3秒后继续休息2秒，目的是为了等A修改完
-         * B线程休息完后取出自己所存的Student，看看里面的age到底是19还是11
-         */
-        for (int i = 0; i < 10; i++) {
-            System.out.println("第" + i + "次线程");
-            ThreadPools.execute(ThreadLocalTest::setPerson);
+        String s = methodTest();
+        System.out.println(s);
+    }
+
+    private static String methodTest() {
+        try {
+            int i = 1 / 0;
+            System.out.println("/0");
+            // 生成一个MD5加密计算摘要
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            // 计算md5函数
+            md.update(("123456".toLowerCase() + "@user").getBytes());
+            // digest()最后确定返回md5 hash值，返回值为8为字符串。因为md5 hash值是16位的hex值，实际上就是8位的字符
+            // BigInteger函数则将8位的字符串转换成16位hex值，用字符串来表示；得到字符串形式的hash值
+            System.out.println(new BigInteger(1, md.digest()).toString(16));
+            return "normal";
+        } catch (Exception ex) {
+            System.out.println("catch到了");
+        } finally {
+            System.out.println("finally");
         }
+        return "finally";
     }
 }

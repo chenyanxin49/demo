@@ -17,11 +17,17 @@ import org.springframework.web.bind.annotation.*;
 public class HelloWorld {
 
     @GetMapping("/{v}")
-    public String getT(@PathVariable Child v) {
+    public String getT(@PathVariable String v) {
         return String.format(" hello world = %s", v);
     }
+
     @PostMapping("/child")
     public String postT(@RequestBody Child v) {
+        return String.format(" hello world = %s", v);
+    }
+
+    @PostMapping("/test")
+    public String test(String v) {
         return String.format(" hello world = %s", v);
     }
 }
