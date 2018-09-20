@@ -1,5 +1,7 @@
 package com.example.tests;
 
+import com.example.domain.Bar;
+import com.example.domain.Foo;
 import com.example.domain.Person;
 
 import java.io.BufferedReader;
@@ -39,11 +41,19 @@ public class StreamSingleTest {
 //        generateTest();
 //        iterateTest();
 //        collectorsTest();
-        String a = null;
-        String[] split = a.split("d,");
-        for (String s : split) {
-            System.out.println(s);
+        List<Foo> foos = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            Foo foo = new Foo("foo" + i);
+            List<Bar> bars = new ArrayList<>();
+            for (int x = 0; x < 5; x++) {
+                bars.add(new Bar("bar" + x));
+            }
+            foo.setBars(bars);
+            foos.add(foo);
         }
+        List<String> collect = foos.stream().flatMap(foo -> foo.getBars().stream())
+                .map(Bar::getName).collect(Collectors.toList());
+        System.out.println(collect);
     }
 
     private static void collectorsTest() {

@@ -18,6 +18,10 @@
             margin-left: 40%;
         }
     </style>
+    <script>
+        var t = getQueryString("id");
+        alert(t);
+    </script>
 </head>
 <body>
 <form class="form-horizontal" id="form_table" action=""
@@ -49,11 +53,6 @@
     <el-row>
         <el-col :span="8">
             <el-button id="login" v-on:click="quest" style="width:100%" type="primary">提交</el-button>
-        </el-col>
-    </el-row>
-    <el-row>
-        <el-col :span="8">
-            <el-button id="test" v-on:click="loc" style="width:100%" type="primary">loc</el-button>
         </el-col>
     </el-row>
 </div>
@@ -106,9 +105,6 @@
                         alert(data);
                     }
                 })
-            },
-            loc: function () {
-                window.location.href="test.html?id=" + encodeURIComponent("#123");
             }
         }
     })

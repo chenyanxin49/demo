@@ -64,7 +64,6 @@ spring:
 #          是否默认将消费失败的消息重新加入正常队列
         default-requeue-rejected: false
 #        自动ACK
-        acknowledge-mode: auto
 
 
 mybatis:
