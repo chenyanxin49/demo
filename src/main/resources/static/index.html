@@ -8,14 +8,13 @@
     <script src="/js/element/index.js"></script>
     <script src="/js/common/jquery-1.8.3.js"></script>
     <style>
-        .el-row
-        {
+        .el-row {
             margin-bottom: 20px;
         }
-        .login-box
-        {
-            margin-top:20%;
-            margin-left:40%;
+
+        .login-box {
+            margin-top: 20%;
+            margin-left: 40%;
         }
     </style>
 </head>
@@ -59,54 +58,54 @@
         data: {
             options: [
                 {
-                value: 'routeDetail',
-                label: '线路详情 routeDetail'
-            }, {
-                value: 'routeBrief',
-                label: '线路简要 routeBrief'
-            }, {
-                value: 'projectDetail',
-                label: '团队详情 projectDetail'
-            }, {
-                value: 'projectBrief',
-                label: '团队简要 projectBrief'
-            }, {
-                value: 'projectPeopleNumber',
-                label: '团队人数 projectPeopleNumber'
-            }, {
-                value: 'orderDetail',
-                label: '订单详情 orderDetail'
-            }, {
-                value: 'orderFinance',
-                label: '订单财务 orderFinance'
-            }, {
-                value: 'visitorDetail',
-                label: '游客详情 visitorDetail'
-            }, {
-                value: 'customerDetail',
-                label: '客户详情 customerDetail'
-            }, {
-                value: 'customerBrief',
-                label: '客户简要 customerBrief'
-            }, {
-                value: 'ticketPurchase',
-                label: '机票库存 ticketPurchase'
-            }, {
-                value: 'visaDetail',
-                label: '签证详情 visaDetail'
-            }, {
-                value: 'destination',
-                label: '目的地 destination'
-            }, {
-                value: 'sightDetail',
-                label: '景点详情 sightDetail'
-            }, {
-                value: 'businessArea',
-                label: '业务区域 businessArea'
-            }, {
-                value: 'routeLabel',
-                label: '线路主题 routeLabel'
-            }],
+                    value: 'routeDetail',
+                    label: '线路详情 routeDetail'
+                }, {
+                    value: 'routeBrief',
+                    label: '线路简要 routeBrief'
+                }, {
+                    value: 'projectDetail',
+                    label: '团队详情 projectDetail'
+                }, {
+                    value: 'projectBrief',
+                    label: '团队简要 projectBrief'
+                }, {
+                    value: 'projectPeopleNumber',
+                    label: '团队人数 projectPeopleNumber'
+                }, {
+                    value: 'orderDetail',
+                    label: '订单详情 orderDetail'
+                }, {
+                    value: 'orderFinance',
+                    label: '订单财务 orderFinance'
+                }, {
+                    value: 'visitorDetail',
+                    label: '游客详情 visitorDetail'
+                }, {
+                    value: 'customerDetail',
+                    label: '客户详情 customerDetail'
+                }, {
+                    value: 'customerBrief',
+                    label: '客户简要 customerBrief'
+                }, {
+                    value: 'ticketPurchase',
+                    label: '机票库存 ticketPurchase'
+                }, {
+                    value: 'visaDetail',
+                    label: '签证详情 visaDetail'
+                }, {
+                    value: 'destination',
+                    label: '目的地 destination'
+                }, {
+                    value: 'sightDetail',
+                    label: '景点详情 sightDetail'
+                }, {
+                    value: 'businessArea',
+                    label: '业务区域 businessArea'
+                }, {
+                    value: 'routeLabel',
+                    label: '线路主题 routeLabel'
+                }],
             messageData: {
                 objectType: '',
                 objectKeyId: ''
@@ -114,7 +113,7 @@
             value: ''
         },
         methods: {
-            quest:function () {
+            quest: function () {
                 var message = this.messageData;
                 // message.objectType = this.value;
                 if (message.objectType === '') {
@@ -130,11 +129,11 @@
                     return;
                 }
                 var test = null;
-                var data = {"test":test};
+                var data = {"test": test};
                 $.ajax({
                     url: '/hello/test',
                     type: 'post',
-                    data: $.extend({},data),
+                    data: $.extend({}, data),
                     dataType: 'text',
                     success: function (data) {
                         alert(data)
