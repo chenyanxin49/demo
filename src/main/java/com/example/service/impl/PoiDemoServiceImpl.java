@@ -1,8 +1,8 @@
-package com.example.serivce.impl;
+package com.example.service.impl;
 
 import com.example.domain.FXbhB;
 import com.example.mapper.FXbhBMapper;
-import com.example.serivce.IPoiDemoService;
+import com.example.service.IPoiDemoService;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;

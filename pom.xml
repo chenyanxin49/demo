@@ -50,7 +50,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -98,11 +101,11 @@
         </dependency>
 
         <!-- 热加载 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-devtools</artifactId>-->
+            <!--<optional>true</optional>-->
+        <!--</dependency>-->
 
         <!--swagger2-->
         <dependency>
@@ -143,19 +146,19 @@
             <groupId>org.apache.solr</groupId>
             <artifactId>solr-solrj</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
         <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>hal-browser</artifactId>-->
+            <!--<groupId>org.jetbrains</groupId>-->
+            <!--<artifactId>annotations</artifactId>-->
+            <!--<version>RELEASE</version>-->
+            <!--<scope>compile</scope>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>webjars-locator-core</artifactId>-->
+        <!--<groupId>org.webjars</groupId>-->
+        <!--<artifactId>hal-browser</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.webjars</groupId>-->
+        <!--<artifactId>webjars-locator-core</artifactId>-->
         <!--</dependency>-->
     </dependencies>
 

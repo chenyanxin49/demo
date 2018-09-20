@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * Company :       realtour
  * MqConsumer
  */
-@Component
+//@Component
 //@RabbitListener(queues = {"queue1","queue2"})
 public class MqConsumer {
 

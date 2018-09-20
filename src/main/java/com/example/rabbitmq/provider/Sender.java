@@ -15,7 +15,7 @@ import java.util.UUID;
  * @author: chenYanXin
  * @create: 2018/8/30 17:52
  */
-@Component
+//@Component
 public class Sender implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnCallback {
 
     @Autowired

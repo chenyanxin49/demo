@@ -16,7 +16,7 @@ import java.util.Map;
  * @author: chenYanXin
  * @create: 2018/8/30 17:49
  */
-@Configuration
+//@Configuration
 public class RabbitConfig {
 
     /**

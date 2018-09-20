@@ -16,7 +16,7 @@ import java.util.Map;
  * Company :       realtour
  * DeadLeater
  */
-@Configuration
+//@Configuration
 public class DeadLetter {
 
 //    @Bean

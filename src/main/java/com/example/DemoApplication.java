@@ -2,6 +2,7 @@ package com.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * Created by      Intellij IDEA
@@ -13,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Company :       北京太比雅科技(武汉研发中心)
  */
 @SpringBootApplication
+@EnableAspectJAutoProxy
 public class DemoApplication {
 
     public static void main(String[] args) {
