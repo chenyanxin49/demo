@@ -239,7 +239,7 @@ function newGuid() {
             async: false,
             type: "post",
             cache: false,
-            url: "/common/getGuidList",
+            url: "/commonjs/getGuidList",
             dataType: "json",
             success: function (result) {
                 if (!$.isEmptyObject(result)) {
