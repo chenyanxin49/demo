@@ -1,9 +1,13 @@
 package com.example.controller;
 
 import com.example.domain.Child;
+import com.example.domain.Person;
+import com.example.mapper.PersonMapper;
 import com.example.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by      Intellij IDEA
@@ -49,5 +53,13 @@ public class HelloWorld {
     public String error() {
         testService.test();
         return "hello world";
+    }
+
+    @Autowired
+    private PersonMapper personMapper;
+
+    @GetMapping("/person")
+    public List<Person> listPerson(){
+        return personMapper.selectByExample(null);
     }
 }

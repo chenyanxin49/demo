@@ -1,7 +1,6 @@
 package com.example.service.impl;
 
-import com.example.domain.FXbhB;
-import com.example.mapper.FXbhBMapper;
+import com.example.domain.Person;
 import com.example.service.IPoiDemoService;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -23,9 +22,6 @@ import java.util.List;
 @Service
 public class PoiDemoServiceImpl implements IPoiDemoService {
 
-    @Autowired
-    private FXbhBMapper fXbhBMapper;
-
     /**
      * 获取sqlsession
      * 从spring注入原有的sqlSessionTemplate
@@ -39,18 +35,18 @@ public class PoiDemoServiceImpl implements IPoiDemoService {
      * @param areas
      */
     @Override
-    public void saveBatch(List<FXbhB> areas) {
+    public void saveBatch(List<Person> areas) {
         int i = 0;
         // 新获取一个模式为BATCH，自动提交为false的session
         // 如果自动提交设置为true,将无法控制提交的条数，改为最后统一提交，可能导致内存溢出
         SqlSession session = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);
         // 通过新的session获取mapper
-        fXbhBMapper = session.getMapper(FXbhBMapper.class);
+//        fXbhBMapper = session.getMapper(FXbhBMapper.class);
         try {
-            for (FXbhB area : areas) {
+            for (Person area : areas) {
                 i++;
 
-                fXbhBMapper.insert(area);
+//                fXbhBMapper.insert(area);
                 if (i % 1000 == 0) {
                     // 手动每1000个一提交，提交后无法回滚
                     session.commit();

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.example.domain.FXbhB;
+import com.example.domain.Person;
 import com.example.service.IPoiDemoService;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -38,7 +38,7 @@ public class PoiDemo {
     public String batchImport(File file, String fileFileName) throws IOException {
 //    public String batchImport(File file, String fileFileName, String fileContentType) throws IOException {
 //        Log.info("文件类型=" + fileContentType);
-        List<FXbhB> stsS = new ArrayList<>();
+        List<Person> stsS = new ArrayList<>();
         Log.info("文件名=" + fileFileName);
 
         Workbook workbook = null;
@@ -80,40 +80,40 @@ public class PoiDemo {
 //                    String lgtd = lglt[0].substring(0, 10);
 //                    String lttd = lglt[1].substring(0, 9);
 //                    System.out.println("lgtd = " + lgtd + "lttd = " + lttd);
-                    FXbhB sb = new FXbhB();
+                    Person sb = new Person();
 
                 Cell ttcd = row.getCell(0);
                 if (ttcd != null){
                     tcd = (long) ttcd.getNumericCellValue();
                 }
-                    sb.setAddvcd(String.valueOf(tcd));
+//                    sb.setAddvcd(String.valueOf(tcd));
 
                 Cell vnm = row.getCell(1);
                 if (vnm != null){
                     villNm = vnm.getStringCellValue();
                 }
-                    sb.setAddvnm(villNm);
-                    sb.setXbh(row.getCell(2).getStringCellValue());
-                    sb.setArea(row.getCell(3).getNumericCellValue());
-                    sb.setStcd(String.valueOf((int) row.getCell(4).getNumericCellValue()));
-                    sb.setUseType(String.valueOf((int) row.getCell(5).getNumericCellValue()));
-                    sb.setForOwn(String.valueOf((int) row.getCell(6).getNumericCellValue()));
-                    sb.setForUse(String.valueOf((int) row.getCell(7).getNumericCellValue()));
-                    sb.setTreeOwn(String.valueOf((int) row.getCell(8).getNumericCellValue()));
-                    sb.setTreeUse(String.valueOf((int) row.getCell(9).getNumericCellValue()));
+//                    sb.setAddvnm(villNm);
+//                    sb.setXbh(row.getCell(2).getStringCellValue());
+//                    sb.setArea(row.getCell(3).getNumericCellValue());
+//                    sb.setStcd(String.valueOf((int) row.getCell(4).getNumericCellValue()));
+//                    sb.setUseType(String.valueOf((int) row.getCell(5).getNumericCellValue()));
+//                    sb.setForOwn(String.valueOf((int) row.getCell(6).getNumericCellValue()));
+//                    sb.setForUse(String.valueOf((int) row.getCell(7).getNumericCellValue()));
+//                    sb.setTreeOwn(String.valueOf((int) row.getCell(8).getNumericCellValue()));
+//                    sb.setTreeUse(String.valueOf((int) row.getCell(9).getNumericCellValue()));
                 Cell cell = row.getCell(10);
                 String v = null;
                 if (cell != null){
                     v = cell.getStringCellValue();
                 }
-                    sb.setTreeOwner(v);
+//                    sb.setTreeOwner(v);
                 int year = (int) row.getCell(11).getNumericCellValue();
                 if (year == 0){
                     year = 2017;
                 }
-                sb.setFoundYear(String.valueOf(year));
-                sb.setModtm(date);
-                sb.setCountYear("2017");
+//                sb.setFoundYear(String.valueOf(year));
+//                sb.setModtm(date);
+//                sb.setCountYear("2017");
 //                    sb.setLgtd(Double.parseDouble(lgtd));
 //                    sb.setLttd(Double.parseDouble(lttd));
                 num++ ;
