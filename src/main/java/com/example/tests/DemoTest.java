@@ -81,8 +81,8 @@ public class DemoTest {
 //        testProcessHandle();
 //        variableHandlesTest();
 //        System.out.println(JSONObject.parseObject(encryptTest()));
-        jsonTest();
-//        Bar bar = tTest(Bar.class);
+//        jsonTest();
+        Bar bar = tTest(Bar.class);
 //        assert bar != null;
 //        System.out.println(bar.getName());
 //        Foo foo = tTest(Foo.class);
@@ -103,12 +103,13 @@ public class DemoTest {
                 if ("setName".equals(method.getName())) {
                     method.invoke(t, "lisi");
                 }
+                throw new RuntimeException();
             }
             Method setName = clazz.getMethod("setName", String.class);
             setName.invoke(t, "ls");
             return t;
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return null;
         }
     }
