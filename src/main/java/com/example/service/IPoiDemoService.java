@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.domain.FXbhB;
+import com.example.domain.Person;
 
 import java.util.List;
 
@@ -20,6 +20,6 @@ public interface IPoiDemoService {
      * 批量保存区域实现
      * @param areas
      */
-    public void saveBatch(List<FXbhB> areas);
+    public void saveBatch(List<Person> areas);
 
 }
