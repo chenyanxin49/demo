@@ -1,0 +1,72 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://localhost:3306/test?useSSL=false
+    username: root
+    password: cyxcwj
+    druid:
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 30000
+      validationQuery: select 'x'
+      testOnBorrow: true
+      testOnReturn: false
+      testWhileIdle: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+
+#  redis:
+    host: 192.168.137.60
+    port: 6379
+    timeout: 3000ms
+#    password: cyxcwj
+    database: 0
+    jedis:
+      pool:
+        max-active: 8
+
+  data:
+    mongodb:
+      uri: mongodb://mongo.realtour.com.cn:27017/Realtourr8qjb2b
+      database: Realtourr8qjb2b
+      authenticationDatabase: Realtourr8qjb2b
+
+    #  rabbitmq:
+    host: 39.106.6.230
+    port: 5672
+    username: realtour
+    password: RabbitMQ#Realtour
+    #    消息确认
+    publisher-confirms: true
+    #    返回信息
+    publisher-returns: true
+    template:
+      #      mandatory标志告诉broker代理服务器至少将消息route到一个队列中，否则就将消息return给发送者
+      mandatory: true
+    listener:
+      simple:
+        #        同时启动两个监听线程
+        concurrency: 2
+        #        最大允许两个监听线程
+        max-concurrency: 2
+        #        采用手动应答
+        acknowledge-mode: manual
+        retry:
+          enabled: true
+          #          重试次数
+          max-attempts: 2
+          #          每次间隔毫秒
+          initial-interval: 10000
+        #          是否默认将消费失败的消息重新加入正常队列
+        default-requeue-rejected: false
+#        自动ACK
+
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
