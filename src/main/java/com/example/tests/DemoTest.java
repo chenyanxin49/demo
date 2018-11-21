@@ -81,13 +81,20 @@ public class DemoTest {
 //        testProcessHandle();
 //        variableHandlesTest();
 //        System.out.println(JSONObject.parseObject(encryptTest()));
-        jsonTest();
+//        jsonTest();
 //        Bar bar = tTest(Bar.class);
 //        assert bar != null;
 //        System.out.println(bar.getName());
 //        Foo foo = tTest(Foo.class);
 //        assert foo != null;
 //        System.out.println(foo.getName());
+        Foo f = null;
+        Foo f1 = new Foo("1");
+        List<Foo> l = new ArrayList<>();
+        l.add(f1);
+        l.add(f);
+        List<String> collect = l.stream().map(x -> x.getName()).collect(Collectors.toList());
+        System.out.println(collect);
     }
 
     private static <T> T tTest(Class<T> clazz) {
@@ -103,12 +110,13 @@ public class DemoTest {
                 if ("setName".equals(method.getName())) {
                     method.invoke(t, "lisi");
                 }
+                throw new RuntimeException();
             }
             Method setName = clazz.getMethod("setName", String.class);
             setName.invoke(t, "ls");
             return t;
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return null;
         }
     }
