@@ -82,12 +82,19 @@ public class DemoTest {
 //        variableHandlesTest();
 //        System.out.println(JSONObject.parseObject(encryptTest()));
 //        jsonTest();
-        Bar bar = tTest(Bar.class);
+//        Bar bar = tTest(Bar.class);
 //        assert bar != null;
 //        System.out.println(bar.getName());
 //        Foo foo = tTest(Foo.class);
 //        assert foo != null;
 //        System.out.println(foo.getName());
+        Foo f = null;
+        Foo f1 = new Foo("1");
+        List<Foo> l = new ArrayList<>();
+        l.add(f1);
+        l.add(f);
+        List<String> collect = l.stream().map(x -> x.getName()).collect(Collectors.toList());
+        System.out.println(collect);
     }
 
     private static <T> T tTest(Class<T> clazz) {
