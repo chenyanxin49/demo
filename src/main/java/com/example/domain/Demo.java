@@ -16,7 +16,7 @@ public class Demo {
 
     public int count = 1;
     protected long sum = 100;
-    private String name = "init";
+    private String name = "date";
     public int[] arrayData = new int[]{3, 5, 7};
 
     @Override

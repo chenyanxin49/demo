@@ -16,6 +16,7 @@ import java.io.FileReader;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -27,6 +28,7 @@ import java.text.MessageFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 import java.util.concurrent.*;
@@ -88,13 +90,47 @@ public class DemoTest {
 //        Foo foo = tTest(Foo.class);
 //        assert foo != null;
 //        System.out.println(foo.getName());
-        Foo f = null;
-        Foo f1 = new Foo("1");
-        List<Foo> l = new ArrayList<>();
-        l.add(f1);
-        l.add(f);
-        List<String> collect = l.stream().map(x -> x.getName()).collect(Collectors.toList());
-        System.out.println(collect);
+//        Foo f = null;
+//        Foo f1 = new Foo("1");
+//        List<Foo> l = new ArrayList<>();
+//        l.add(f1);
+//        l.add(f);
+//        List<String> collect = l.stream().map(x -> x.getName()).collect(Collectors.toList());
+//        String[] strArr = new String[] { "www.micmiu.com",
+//                "!@#$%^&*()_+{}[]|\"'?/:;<>,.", "！￥……（）——：；“”‘’《》，。？、", "不要啊",
+//                "やめて韩佳人", "한가인" };
+//        for (String str : strArr) {
+//            System.out.println("===========> 测试字符串：" + str);
+//            System.out.println("Unicode判断结果 ：" + ChineseChUtil.isChinese(str));
+//            System.out.println("详细判断列表：");
+//            char[] ch = str.toCharArray();
+//            for (char c : ch) {
+//                System.out.println(c + " --> " + (ChineseChUtil.isChinese(c) ? "是" : "否"));
+//            }
+//        }
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("1", null);
+//        Object o = map.get("1");
+//        System.out.println(o.toString());
+//        String s = "yyyy-MM-dd HH:mm:ss:SSS";
+//        System.out.println(s.substring(0, 10));
+//        System.out.println(s.substring(11,11+8));
+//        dateTest1();
+        String s = "1";
+        Class<?> clazz = s.getClass();
+        Field[] declaredFields = clazz.getDeclaredFields();
+        LinkedList<String> linkedList = new LinkedList<>();
+        for (Field field : declaredFields) {
+            System.out.println(field.getName());
+        }
+    }
+
+    private static void dateTest1() {
+        DateUtil dateUtil = DateUtil.now().with(DayOfWeek.of(1)).plusDays(7);
+        String firstDay = dateUtil.format("yyyy-MM-dd");
+        String lastDay = dateUtil.plusDays(6).format("yyyy-MM-dd");
+        System.out.println(firstDay + "==" + lastDay);
+        System.out.println(dateUtil.parseOf("2018-09-08").format());
     }
 
     private static <T> T tTest(Class<T> clazz) {
