@@ -16,7 +16,6 @@ import java.io.FileReader;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -28,7 +27,6 @@ import java.text.MessageFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 import java.util.concurrent.*;
@@ -108,21 +106,7 @@ public class DemoTest {
 //                System.out.println(c + " --> " + (ChineseChUtil.isChinese(c) ? "是" : "否"));
 //            }
 //        }
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("1", null);
-//        Object o = map.get("1");
-//        System.out.println(o.toString());
-//        String s = "yyyy-MM-dd HH:mm:ss:SSS";
-//        System.out.println(s.substring(0, 10));
-//        System.out.println(s.substring(11,11+8));
-//        dateTest1();
-        String s = "1";
-        Class<?> clazz = s.getClass();
-        Field[] declaredFields = clazz.getDeclaredFields();
-        LinkedList<String> linkedList = new LinkedList<>();
-        for (Field field : declaredFields) {
-            System.out.println(field.getName());
-        }
+        System.out.println(Arrays.toString(BaseBtnEnum.values()));
     }
 
     private static void dateTest1() {
