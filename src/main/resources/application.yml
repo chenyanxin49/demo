@@ -1,8 +1,9 @@
 spring:
   profiles:
-    active: mydev
-#    active: dev
-
+#    active: mydev
+    active: dev
+server:
+  port: 9999
 #eureka:
 #  client:
 #    service-url:

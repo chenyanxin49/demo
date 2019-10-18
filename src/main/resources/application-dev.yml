@@ -2,9 +2,9 @@ spring:
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
         driverClassName: org.gjt.mm.mysql.Driver
-        url: jdbc:mysql://39.106.6.230:3306/RealTourR8_QJ_B2B?characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+        url: jdbc:mysql://rm-2ze7021l13m5ad1klbo.mysql.rds.aliyuncs.com:3306/rt-saas-oa-dev?characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
         username: realtour
-        password: 333YCFXzyz!
+        password: 333YCFXzyz
         druid:
             initialSize: 5
             minIdle: 5

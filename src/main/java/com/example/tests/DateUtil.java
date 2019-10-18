@@ -10,6 +10,7 @@ import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.TemporalAmount;
 import java.time.temporal.TemporalUnit;
+import java.util.Locale;
 
 /**
  * 时间操作工具类
@@ -184,7 +185,7 @@ public class DateUtil {
         if (StringUtils.isBlank(pattern)) {
             pattern = DEFAULT_PATTERN;
         }
-        return DateTimeFormatter.ofPattern(pattern).format(localDateTime);
+        return DateTimeFormatter.ofPattern(pattern, Locale.CHINA).format(localDateTime);
     }
 
     /**

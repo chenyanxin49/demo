@@ -231,7 +231,7 @@ public class StreamSingleTest {
     }
 
     private static void forEachTest() {
-        List<Person> roster = List.of(
+        List<Person> roster = Arrays.asList(
                 new Person("max", "male", 21),
                 new Person("alice", "female", 18),
                 new Person("allen", "male", 23),
@@ -288,7 +288,7 @@ public class StreamSingleTest {
 
     private static void mapTest() {
 
-        List<String> wordList = List.of("anyMatch", "allMatch", "noneMatch", "findFirst", "findAny", "limit");
+        List<String> wordList = Arrays.asList("anyMatch", "allMatch", "noneMatch", "findFirst", "findAny", "limit");
         List<String> output = wordList.stream().
                 map(String::toUpperCase).
                 collect(Collectors.toList());
@@ -350,12 +350,12 @@ public class StreamSingleTest {
         // 1,2,3,4,5 range是< rangeClosed是<=
         IntStream intStream = IntStream.range(1, 6);
         intStream.forEach(System.out::println);
-        List<Integer> list = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
         Stream<Integer> stream = list.stream();
         // 1. Array
 //        Integer[] strArray1 = stream.toArray(Integer[]::new);
 
-        List<String> list1 = List.of("1", "2", "3", "4", "5");
+        List<String> list1 = Arrays.asList("1", "2", "3", "4", "5");
         Stream<String> stream1 = list1.stream();
         // 2. Collection
 //        List<String> list11 = stream1.collect(Collectors.toList());

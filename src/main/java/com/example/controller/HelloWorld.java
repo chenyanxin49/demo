@@ -32,7 +32,7 @@ public class HelloWorld {
 
     @GetMapping()
     public String listAll() {
-        DateUtil d = DateUtil.now();
+        DateUtil d = DateUtil.date("2019-10-18");
         System.out.println(d.format("EEEE"));
         return d.format("EEEE");
     }

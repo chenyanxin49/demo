@@ -13,7 +13,6 @@ import org.springframework.core.convert.converter.Converter;
 
 import java.io.*;
 import java.lang.invoke.MethodHandles;
-import java.lang.invoke.VarHandle;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
@@ -222,47 +221,6 @@ public class DemoTest {
             e.printStackTrace();
             System.out.println("Exception");
         }
-    }
-
-    private static void variableHandlesTest() {
-        try {
-            Demo instance = new Demo();
-            System.out.println(instance);
-            VarHandle arrayVarHandle = MethodHandles.arrayElementVarHandle(int[].class);
-
-            // 访问public成员 proteced成员
-            VarHandle countHandle = MethodHandles.lookup()
-                    .in(Demo.class)
-                    .findVarHandle(Demo.class, "count", int.class);
-            countHandle.set(instance, 99);
-
-            // 访问private成员
-            countHandle = MethodHandles.privateLookupIn(Demo.class, MethodHandles.lookup())
-                    .findVarHandle(Demo.class, "name", String.class);
-            countHandle.set(instance, "hello world");
-            // 替换指定位置，指定数值的值
-            arrayVarHandle.compareAndSet(instance.arrayData, 1, 5, 100);
-            arrayVarHandle.compareAndSet(instance.arrayData, 0, 3, 300);
-            System.out.println(instance);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void testProcessHandle() {
-        final ProcessHandle processHandle = ProcessHandle.current();
-        final ProcessHandle.Info info = processHandle.info();
-        System.out.println("Process info =>");
-        System.out.format("PID: %s%n", processHandle.pid());
-        info.arguments().ifPresent(args -> System.out.format("Arguments: %s%n", Arrays.toString(args)));
-        info.command().ifPresent(command -> System.out.format("Command: %s%n", command));
-        info.commandLine()
-                .ifPresent(commandLine -> System.out.format("Command line: %s%n", commandLine));
-        info.startInstant()
-                .ifPresent(startInstant -> System.out.format("Start time: %s%n", startInstant));
-        info.totalCpuDuration()
-                .ifPresent(cpuDuration -> System.out.format("CPU time: %s%n", cpuDuration));
-        info.user().ifPresent(user -> System.out.format("User: %s%n", user));
     }
 
     private static void useByteBuffer() {
@@ -591,28 +549,6 @@ public class DemoTest {
         LocalDate firstMondayOf2015 = LocalDate.parse("2015-01-01").with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
         System.out.println(firstMondayOf2015);
 
-    }
-
-    private static void reduceTest() {
-        List<Integer> costBeforeTax = Arrays.asList(100, 200, 300, 400, 500);
-//        double total = 0;
-//        for (Integer cost : costBeforeTax) {
-//            double price = cost + .12*cost;
-//            total = total + price;
-//
-//        }
-//        System.out.println("Total : " + total);
-
-        // New way:
-        Double bill = costBeforeTax.stream().map((cost) -> cost + .12 * cost)
-                .reduce((sum, cost) -> sum + cost)
-                .orElse(null);
-        System.out.println("Total : " + bill);
-
-        List<Integer> arr = List.of(4, 12, 1, 3, 5, 7, 9);
-
-        arr.stream().reduce((x, y) -> x + y).ifPresent(System.out::println);
-        System.out.println(arr.stream().reduce(-10, (x, y) -> x + y));
     }
 
     private static void filter(List<String> names, Predicate<String> condition) {
