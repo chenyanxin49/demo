@@ -73,7 +73,7 @@ public class DateUtil {
         } else if (srcDate.contains("-") && srcDate.length() <= startOfHour - 1) {
             patStr = DEFAULT_FULL_PATTERN.substring(0, startOfHour - 1);
             LocalDate localDate = LocalDate.parse(srcDate, DateTimeFormatter.ofPattern(patStr));
-            localDateTime = localDateTime.with(localDate).with(LocalTime.parse(START_DAY));
+            localDateTime = localDate.atStartOfDay();
         } else if (srcDate.contains(":") && startOfHour + srcDate.length() <= DEFAULT_FULL_PATTERN.length()) {
             patStr = DEFAULT_FULL_PATTERN.substring(startOfHour);
             LocalTime localTime = LocalTime.parse(srcDate, DateTimeFormatter.ofPattern(patStr));

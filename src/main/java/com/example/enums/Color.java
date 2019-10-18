@@ -42,9 +42,4 @@ public enum Color {
     public String getAddress() {
         return address;
     }
-
-    @Override
-    public String toString() {
-        return address;
-    }
 }

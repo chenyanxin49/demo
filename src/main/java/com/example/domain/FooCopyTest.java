@@ -17,17 +17,11 @@ import java.util.List;
  * Foo
  */
 @Data
-public class Foo implements Serializable {
+public class FooCopyTest implements Serializable {
     private String name;
     private String name1;
-    private String name2;
-    private String name3;
     private Bar bar;
     private List<Bar> bars = new ArrayList<>();
-
-    public Foo(String name) {
-        this.name = name;
-    }
 
     public String getName() {
         return name;
@@ -51,14 +45,5 @@ public class Foo implements Serializable {
 
     public void setBar(Bar bar) {
         this.bar = bar;
-    }
-
-    @Override
-    public String toString() {
-        return "Foo{" +
-                "name='" + name + '\'' +
-                ", bar=" + bar +
-                ", bars=" + bars +
-                '}';
     }
 }

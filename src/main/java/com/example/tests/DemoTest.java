@@ -8,11 +8,10 @@ import com.example.domain.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.core.convert.converter.Converter;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
 import java.lang.reflect.Constructor;
@@ -106,7 +105,42 @@ public class DemoTest {
 //                System.out.println(c + " --> " + (ChineseChUtil.isChinese(c) ? "是" : "否"));
 //            }
 //        }
-        System.out.println(Arrays.toString(BaseBtnEnum.values()));
+
+//        DateUtil d = DateUtil.now();
+//        d.setMonth(12).setDayOfMonth(27);
+//        System.out.println(d.localDateTime.getDayOfWeek());
+//        System.out.println(d.with(DayOfWeek.SUNDAY));
+//        System.out.println(d.localDateTime.getDayOfWeek());
+//        System.out.println("01中国6FeL.Lwt".substring("01中国6FeL.Lwt".lastIndexOf(".")));
+//        Foo f1 = new Foo("1");
+//        f1.setBars(Arrays.asList(new Bar("bar1"),new Bar("bar2"),new Bar("bar3")));
+//        f1.setBar(new Bar("bar"));
+//        Foo foo = cloneObject(f1);
+//        System.out.println(foo.toString());
+        DateUtil d = DateUtil.now();
+        System.out.println(d.format("EEEE"));
+    }
+
+    /**
+     * 对象深克隆
+     *
+     * @param model 对象
+     * @param <T>   泛型
+     * @return 克隆的新对象
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T cloneObject(T model) {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream out;
+        try {
+            out = new ObjectOutputStream(bos);
+            out.writeObject(model);
+            ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray()));
+            return (T) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private static void dateTest1() {

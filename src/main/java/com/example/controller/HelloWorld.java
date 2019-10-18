@@ -4,6 +4,7 @@ import com.example.domain.Child;
 import com.example.domain.Person;
 import com.example.mapper.PersonMapper;
 import com.example.service.TestService;
+import com.example.tests.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,9 @@ public class HelloWorld {
 
     @GetMapping()
     public String listAll() {
-        return String.format(" hello world = %s", "listAll");
+        DateUtil d = DateUtil.now();
+        System.out.println(d.format("EEEE"));
+        return d.format("EEEE");
     }
 
     @GetMapping("/{id}")
